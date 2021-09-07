@@ -3,6 +3,7 @@ from announcer_wrapper import AnnouncerWrapper
 from types import SimpleNamespace
 import json
 from pydub import AudioSegment
+import random
 
 class WorkoutDecoder:
 
@@ -21,9 +22,12 @@ class WorkoutDecoder:
 
         workout = Workout(x)
 
+        # If specified, shuffle the provided exercises
+        if configuration.decoded_object.ShuffleExercises:
+            random.shuffle(workout.decoded_object.exercises)
+
         # Create announcement of workout
         print("Creating workout: " + workout.decoded_object.name)
-        
         total_clip = self.announcer_wrapper.create_voice_clip("Starting workout:" + workout.decoded_object.name + 
                                                               " in " + str(workout.decoded_object.startDelay) + " seconds." +
                                                               " first exercise will be: " + workout.decoded_object.exercises[0].name)
