@@ -1,0 +1,71 @@
+{
+    "name": "Upper Body",
+    "startDelay": 20,
+    "finishDelay": 60,
+    "exercises": [
+      {
+        "name": "Seated Rows",
+        "description": "Sit down with legs out. Hook bands on feet. Pull with rowing motion.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Alt Low Crossover",
+        "description": "Standing with arms down at your sides. Hook bands on one or more feet. Perform dumbbell curl across body.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Pull Aparts",
+        "description": "Standing with arms out, level with shoulders. Pull to t-pose. Band should never be slack.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "High Crossover",
+        "description": "Standing with arms in front. Hook bands on one or more feet. Pull up to shoulder height with slight elbow bend.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Bicep Curls",
+        "description": "Standing with arms at your sides. Hook bands on one or more feet. Perform Dumbbell curls.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Shoulder Lat Raise",
+        "description": "Standing with arms down at sides. Pull up to t-pose.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "description": "Standing with arms above. Hook bands on back foot, behind body. Pull up arms so they are straight.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Arnold Press",
+        "description": "Standing with arms up along-side your chest. Hook band on foot. Pull up to mostly straight arms.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      }
+    ]
+  }

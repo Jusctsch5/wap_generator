@@ -1,0 +1,4 @@
+temp/*
+result/*
+__pycache__
+ffmpeg.exe

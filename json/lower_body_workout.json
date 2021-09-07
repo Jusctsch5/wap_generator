@@ -1,0 +1,63 @@
+{
+    "name": "Lower Body",
+    "startDelay": 20,
+    "finishDelay": 60,
+    "exercises": [
+      {
+        "name": "Hex Squats",
+        "description": "Standing up straight with arms at sides. Hook bands on feet. Bend knees to chair position and back.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Romanian Deadlift",
+        "description": "Standing up straight with arms at sides. Hook bands on feet. Bend and touch your toes. Keep back straight.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Kickbacks - Left and Right",
+        "description": "Down on all fours. Grab band with one hand, attach band to corresponding foot. Kick back with banded foot. Alternate between sets",
+        "duration": 30,
+        "sets": 4,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Lying Leg Extensions",
+        "description": "Laying down, hook both bands to your feet. Lay the band under you and grab it. Take your legs and send them vertical, making an L.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Glute Bridge",
+        "description": "Laying down, holding bands in your hands, tight over your chest. Bring torso up.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Hip Abductors - Left and Right",
+        "description": "Standing up, with one band hooked on your leg and the other under your other foot. Extend leg out to the side. Alternate between sets",
+        "duration": 30,
+        "sets": 4,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Lunge with Band - Left and Right",
+        "description": "One leg in front, one back. Band in both hands, looped on your front leg. Lunge down and back up. Alternate legs",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      }
+    ]
+}

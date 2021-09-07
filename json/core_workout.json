@@ -1,0 +1,55 @@
+{
+    "name": "Core",
+    "startDelay": 20,
+    "finishDelay": 60,
+    "exercises": [
+      {
+        "name": "High Standing Crunch",
+        "description": "Using high suspended bands from standing position, bring your back forward, pulling down your arms",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "High Downward Oblique Swing - Left and Right",
+        "description": "Using high suspended bands from standing position, rotate body while pulling bands across. Should result in a full 180 rotation. Switch between sets",
+        "duration": 30,
+        "sets": 4,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Middle Pallof Press",
+        "description": "Using middle suspended bands, standing with arms out, grab both band handholds and push out at an angle. Band should never be slack. Alternate between ",
+        "duration": 20,
+        "sets": 4,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Middle 180 Twists",
+        "description": "Using middle suspended bands, standing with arms in front, grab both band handholds with both hands and make a large combined fist. Rotate your midsection from 90 degrees right to 90 degress left, and back.",
+        "duration": 30,
+        "sets": 3,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Low Downward Oblique Swing - Left and Right",
+        "description": "Using low suspended bands from standing position, with fists together, rotate body while pulling bands across and up your body. Should result in a full 180 rotation. Switch between sets",
+        "duration": 30,
+        "sets": 4,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      },
+      {
+        "name": "Low Deadbug Dual Knee Ins",
+        "description": "Lying down with hands on both low tight, suspended bands, bring knees up to your chest and back to lying down position",
+        "duration": 30,
+        "sets": 2,
+        "setCooldown": 10,
+        "exerciseCooldown": 30
+      }
+    ]
+  }
