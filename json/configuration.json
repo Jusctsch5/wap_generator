@@ -3,5 +3,7 @@
     "EndTracksOnExercise": false,
     "ReadDescription": true,
     "ShufflePlaylist": false,
-    "ShuffleExercises": true
+    "ShuffleExercises": false,
+    "OutputDirectory": "C:\\Users\\schum\\Dropbox\\Workout",
+    "AdditionalSongDirectory": "C:\\Users\\schum\\Dropbox\\Stepmania\\Songs"
   }

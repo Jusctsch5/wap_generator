@@ -38,18 +38,16 @@ class AnnouncerWrapper:
             except OSError as e:
                 print("Error: %s : %s" % (f, e.strerror))
 
+        name = os.path.join("temp", "countdown_five.mp3")
 
-        """"
-        files = glob.glob('result/*.mp3')
-        for f in files:
-            try:
-                os.remove(f)
-            except OSError as e:
-                print("Error: %s : %s" % (f, e.strerror))    
-        """
-        name = os.path.join("assets", "countdown_five.mp3")
-        clip = AudioSegment.from_file(name)
-        self.countdown_five = clip
+        # Try dynamically generating countdown with reasonable tempo
+        total_clip = 0
+        for i in range(5,0, -1):
+            self.engine.save_to_file(str(i), name)
+            self.engine.runAndWait()
+            clip = AudioSegment.from_file(name)
+            total_clip += clip
+        self.countdown_five = total_clip
 
     def create_voice_clip(self, clip):
 
@@ -93,9 +91,13 @@ class AnnouncerWrapper:
         clip += self.create_delay_with_countdown(duration_seconds)
         return clip
 
-    def generate_total_clip(self, total_clip, name):
+    def generate_total_clip(self, total_clip, name, output_dir):
+
         resulting_name = str(self.session_uuid).split('-')[0] + "_"+ name + ".mp3"
-        resulting_name = os.path.join("result", resulting_name)
+        if output_dir == "":
+            resulting_name = os.path.join("result", resulting_name)
+        else:
+            resulting_name = os.path.join(output_dir, resulting_name)
 
         print("Creating new total workout clip with name: " + resulting_name)
         file_handle = total_clip.export(resulting_name, format="mp3")

@@ -78,8 +78,7 @@ class WorkoutDecoder:
         total_clip += self.announcer_wrapper.create_delay_with_countdown(workout.decoded_object.finishDelay)
         total_clip += self.announcer_wrapper.create_voice_clip("Your Workout:" + workout.decoded_object.name + " Finished. Great job.")
 
-        self.announcer_wrapper.generate_total_clip(total_clip, workout.decoded_object.name)
-
+        workout.total_clip = total_clip
         return workout
 
     def decode_workout(self, workout_filename, configuration):

@@ -1,0 +1,15 @@
+{
+    "name": "Abs",
+    "startDelay": 20,
+    "finishDelay": 60,
+    "exercises": [
+        {
+            "name": "Russian Twist",
+            "description": "Hook bands on your feet. Lay down with your torso at a 45 degree incline. Bend your torso and legs together, engaging your core.",
+            "duration": 30,
+            "sets": 2,
+            "setCooldown": 10,
+            "exerciseCooldown": 30
+        }
+    ]
+}
