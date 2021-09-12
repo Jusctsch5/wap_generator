@@ -2,6 +2,7 @@ import os
 from pydub import AudioSegment
 import random
 from pathlib import Path
+import datetime
 
 class Playlist:
 
@@ -20,7 +21,6 @@ class Playlist:
     def create_combined_clip(self, workout, configuration):
         
         workout_duration = workout.total_clip.duration_seconds
-        current_duration = 0 
         resulting_clip = workout.total_clip
 
         playlist_directory = configuration.decoded_object.AdditionalSongDirectory
@@ -32,6 +32,7 @@ class Playlist:
             random.shuffle(self.decoded_object.playlist)
 
         done = False
+        playlist_clip = AudioSegment.empty()
         while(1):
             for i in range(0, len(self.decoded_object.playlist)):
                 song = self.decoded_object.playlist[i]
@@ -43,23 +44,29 @@ class Playlist:
                 
                 song_segment = AudioSegment.from_file(resulting_name)
                 song_segment = song_segment.apply_gain(-12)
+                if configuration.decoded_object.CrossFade == True and playlist_clip.duration_seconds != 0:
+                    print("Applying crossfade")
+                    playlist_clip = playlist_clip.append(song_segment, crossfade=2500)
+                else:
+                    playlist_clip += song_segment
                 
-                resulting_clip = resulting_clip.overlay(song_segment, 
-                                                        gain_during_overlay=0,
-                                                        position=1000 * current_duration)
-                current_duration += song_segment.duration_seconds
+                print("Appending Song: {} to workout. Current Duration: {}, Workout Duration: {}"
+                      .format(song.name, playlist_clip.duration_seconds, workout_duration))
 
-                print("Appending Song: {} to workout. Current Duration: {}, Workout Duration: {}".format(song.name, current_duration, workout_duration))
-
-                if current_duration >= workout_duration:
+                if playlist_clip.duration_seconds >= workout_duration:
                     done = True
                     break
             if done == True:
                 break
             if shuffle:
                 random.shuffle(self.decoded_object.playlist)
-    
-        resulting_name = workout.decoded_object.name + "WithPlaylist.mp3"
+
+
+        print("Resulting playlist file is {} seconds".format(playlist_clip.duration_seconds))
+        resulting_clip = resulting_clip.overlay(playlist_clip)
+
+
+        resulting_name = workout.decoded_object.name + "_" + str(datetime.date.today()).replace("-", "_") + "_" + "WithPlaylist.mp3"
         resulting_name = os.path.join(output_dir, resulting_name)
         print("Creating new total workout clip and playlist with name: " + resulting_name)
         file_handle = resulting_clip.export(resulting_name, format="mp3")

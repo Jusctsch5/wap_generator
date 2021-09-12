@@ -2,8 +2,9 @@
     "AnnouncementVolume": 1.0,
     "EndTracksOnExercise": false,
     "ReadDescription": true,
-    "ShufflePlaylist": false,
+    "ShufflePlaylist": true,
     "ShuffleExercises": false,
+    "CrossFade": true,
     "OutputDirectory": "C:\\Users\\schum\\Dropbox\\Workout",
     "AdditionalSongDirectory": "C:\\Users\\schum\\Dropbox\\Stepmania\\Songs"
   }
