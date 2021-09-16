@@ -1,0 +1,14 @@
+{
+    "name": "Abs",
+    "startDelay": 20,
+    "finishDelay": 60,
+    "exercises": [
+        {
+            "id": "3d7f94b9-344e-47b7-a2f0-770cf49e8718",
+            "duration": 30,
+            "sets": 2,
+            "setCooldown": 10,
+            "exerciseCooldown": 30
+        }
+    ]
+}

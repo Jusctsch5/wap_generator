@@ -8,10 +8,13 @@ class Workout:
 
     def __init__(self, i_decoded_object):
         self.decoded_object = i_decoded_object
-
+        self.exercises = []
         self.clips = []
         self.total_clip = 0
         self.mp3_filename = ""
+
+    def generate_json():
+        pass
 
     def generate_total_clip(self, output_dir):
 

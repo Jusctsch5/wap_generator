@@ -1,3 +1,4 @@
+from exercise import Exercise
 from workout import Workout
 from announcer_wrapper import AnnouncerWrapper
 from types import SimpleNamespace
@@ -14,7 +15,7 @@ class WorkoutDecoder:
     def __init__(self):
         self.announcer_wrapper = AnnouncerWrapper()
 
-    def __decode_workout(self, workout_filename, configuration):
+    def __decode_workout(self, workout_filename, exercise_database, configuration):
         self.announcer_wrapper.configure(configuration)
 
         with open(workout_filename) as f:
@@ -26,23 +27,74 @@ class WorkoutDecoder:
         if configuration.decoded_object.ShuffleExercises:
             random.shuffle(workout.decoded_object.exercises)
 
-        # Create announcement of workout
-        print("Creating workout: " + workout.decoded_object.name)
-        total_clip = self.announcer_wrapper.create_voice_clip("Starting workout:" + workout.decoded_object.name + 
-                                                              " in " + str(workout.decoded_object.startDelay) + " seconds." +
-                                                              " first exercise will be: " + workout.decoded_object.exercises[0].name)
 
+        """
+        Examples of Schema:
 
-        # Create starting delay
-        if configuration.decoded_object.ReadDescription == True:
-            total_clip += self.announcer_wrapper.create_voice_clip_wih_delay_and_countdown(workout.decoded_object.exercises[0].description, workout.decoded_object.startDelay)
-        else:   
-            total_clip += self.announcer_wrapper.create_delay_with_countdown(workout.decoded_object.startDelay)
+        Schema 1:
+        Exercise is defined in entirity. Exercise DB is not required. 
+        "exercises": [
+            {
+                "name": "Hex Squats",
+                "description": "Standing up straight with arms at sides. Hook bands on feet. Bend knees to chair position and back.",
+                "duration": 30,
+                "sets": 3,
+                "setCooldown": 10,
+                "exerciseCooldown": 30
+            },
+        ]
+
+        Schema 2:
+        Drops the information about the exercise, use ID to look up the exercise.
+        Information like muscle groups, muscles, description, switch sides, are in the exercise db.
+        Information pertaining to duration and sets is contained here.
+        "exercises": [
+            {
+                "id": "3d7f94b9-344e-47b7-a2f0-770cf49e8718",
+                "duration": 30,
+                "sets": 2,
+                "setCooldown": 10,
+                "exerciseCooldown": 30
+            }
+        ]
+
+        Schema 1 will likely be deprecated, however no code below will have to change.
+        """
+        
+        total_clip = AudioSegment.empty()
 
         # Loop over exercises and create voice clips introducing them
+        first = True
         for exercise_i in range(0, len(workout.decoded_object.exercises)):
-            exercise = workout.decoded_object.exercises[exercise_i]
+
+            # If the ID is supplied, then fill out the rest from the database.
+            exercise_json = workout.decoded_object.exercises[exercise_i]
+            print(exercise_json)
+            exercise = Exercise()
+            exercise.id = exercise_json.id
+            exercise.duration = exercise_json.duration
+            exercise.sets = exercise_json.sets
+            exercise.setCooldown = exercise_json.setCooldown
+            exercise.exerciseCooldown = exercise_json.exerciseCooldown
+            if exercise.id:
+                exercise = exercise_database.create_populated_exercise_from_db(exercise)
+
+            if first is True:
+                        # Create announcement of workout
+                print("Creating workout: " + workout.decoded_object.name)
+                total_clip = self.announcer_wrapper.create_voice_clip("Starting workout:" + workout.decoded_object.name + 
+                                                                    " in " + str(workout.decoded_object.startDelay) + " seconds." +
+                                                                    " first exercise will be: " + exercise.name)
+
+                # Create starting delay
+                if configuration.decoded_object.ReadDescription == True:
+                    total_clip += self.announcer_wrapper.create_voice_clip_wih_delay_and_countdown(exercise.description, workout.decoded_object.startDelay)
+                else:   
+                    total_clip += self.announcer_wrapper.create_delay_with_countdown(workout.decoded_object.startDelay)
+                first = False
+
             print("Creating exercise: " + exercise.name)
+
             total_clip += self.announcer_wrapper.create_voice_clip("Starting exercise:" + exercise.name)
 
             # Cache these clips over each set, to reduce calls to the wrapper.
@@ -78,8 +130,9 @@ class WorkoutDecoder:
         total_clip += self.announcer_wrapper.create_delay_with_countdown(workout.decoded_object.finishDelay)
         total_clip += self.announcer_wrapper.create_voice_clip("Your Workout:" + workout.decoded_object.name + " Finished. Great job.")
 
+
         workout.total_clip = total_clip
         return workout
 
-    def decode_workout(self, workout_filename, configuration):
-        return self.__decode_workout(workout_filename, configuration)
+    def decode_workout(self, workout_filename, exercise_database, configuration):
+        return self.__decode_workout(workout_filename, exercise_database, configuration)
