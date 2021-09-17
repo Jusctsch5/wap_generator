@@ -80,7 +80,7 @@ class WorkoutDecoder:
                 exercise = exercise_database.create_populated_exercise_from_db(exercise)
 
             if first is True:
-                        # Create announcement of workout
+                # Create announcement of workout
                 print("Creating workout: " + workout.decoded_object.name)
                 total_clip = self.announcer_wrapper.create_voice_clip("Starting workout:" + workout.decoded_object.name + 
                                                                     " in " + str(workout.decoded_object.startDelay) + " seconds." +
@@ -102,17 +102,21 @@ class WorkoutDecoder:
             cooldown_statement_clip = self.announcer_wrapper.create_voice_clip("Set Cooldown for " + str(exercise.setCooldown) + " seconds.")
             cooldown_duration_clip = self.announcer_wrapper.create_delay_with_countdown(exercise.setCooldown)
 
+            # Perform an exercise
             for i in range(1, exercise.sets+1):
-                clip = self.announcer_wrapper.create_voice_clip("Set " + str(i) + ". Ready Go!")
-                total_clip = total_clip + clip
                 
-                # Add cooldown duration, cooldown statement, and cooldown duration clip
-                total_clip = total_clip + exercise_duration_clip
+                # Add Exercise
+                total_clip += self.announcer_wrapper.create_voice_clip("Set " + str(i) + ". Ready Go!")                
+                total_clip += exercise_duration_clip
+
+                # Transition to the next set of the exercise, if it's not the last set.
                 if i != exercise.sets:
                     total_clip = total_clip + cooldown_statement_clip
-                    total_clip = total_clip + cooldown_duration_clip
+                    if exercise.alternatesidesbetweensets:
+                        total_clip += self.announcer_wrapper.change_sides
+                    total_clip += cooldown_duration_clip
 
-            # If it's not the last exercise, announce the next one and give an exercise delay
+            # If it's not the last exercise in the workout, announce the next one and give an exercise delay
             if exercise_i != len(workout.decoded_object.exercises)-1:
                 clip = self.announcer_wrapper.create_voice_clip("Exercise Cooldown for " + str(exercise.exerciseCooldown) + 
                                                                 " seconds. Next Exercise will be " + 

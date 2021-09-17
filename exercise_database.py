@@ -17,6 +17,7 @@ class ExerciseDatabase:
     def create_populated_exercise_from_db(self, exercise):
         exercise_from_db = self.__get_exercise_from_id(exercise.id)
         if exercise_from_db:
+            exercise.name = exercise_from_db.name
             exercise.description = exercise_from_db.description
             exercise.alternatesidesbetweensets = exercise_from_db.alternatesidesbetweensets
             exercise.musclegroups = exercise_from_db.musclegroups

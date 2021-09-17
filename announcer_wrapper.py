@@ -18,6 +18,7 @@ class AnnouncerWrapper:
         self.session_uuid = uuid.uuid4()
         self.clip_index = 0
         self.countdown_five = ""
+        self.change_sides = ""
 
     def __get_short_uuid_str(self):
         return str(self.session_uuid).split('-')[0]
@@ -48,6 +49,11 @@ class AnnouncerWrapper:
             clip = AudioSegment.from_file(name)
             total_clip += clip
         self.countdown_five = total_clip
+
+        name = os.path.join("temp", "change_sides.mp3")
+        self.engine.save_to_file("change sides", name)
+        self.engine.runAndWait()
+        self.change_sides = AudioSegment.from_file(name)
 
     def create_voice_clip(self, clip):
 
