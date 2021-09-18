@@ -13,7 +13,7 @@ class ExerciseDatabaseDecoder:
         pass
 
     def __validate_exercise(self, exercise_database_object, exercise_object):
-        # Validate all fields exist
+        # Validate all fields exist and are valid
         if exercise_object.name == "":
             raise ValueError("Exercise {} needs a name".format(exercise_object.name))        
         if exercise_object.description == "":
@@ -22,7 +22,13 @@ class ExerciseDatabaseDecoder:
             raise ValueError("Exercise {} needs an id".format(exercise_object.id))                                
         if len(exercise_object.musclegroups) == 0:
             raise ValueError("Exercise {} needs to work one or more muscle groups".format(exercise_object.name))        
-        
+        if exercise_object.duration == 0 or \
+           exercise_object.sets == 0 or \
+           exercise_object.setCooldown == 0 or \
+           exercise_object.exerciseCooldown == 0 or \
+           exercise_object.total_duration == 0:
+            raise ValueError("Exercise {} needs non-zero duration and set information".format(exercise_object.name))        
+
         # For now, let's not mandate muscles. 
         #if len(exercise_object.muscles) == 0:
             #raise ValueError("Exercise {} needs to work one or more muscles".format(exercise_object.name))
@@ -43,7 +49,7 @@ class ExerciseDatabaseDecoder:
             if exercise_object.name == exercise.name:
                 raise ValueError("Exercise {} Name already exists".format(exercise_object.name))
 
-    def __decode_exercise_database(self, exercise_database_filename):
+    def __decode_exercise_database(self, exercise_database_filename, configuration):
         exercise_database_object = ExerciseDatabase()
 
         with open(exercise_database_filename) as f:
@@ -65,10 +71,30 @@ class ExerciseDatabaseDecoder:
                 if 'muscles' in exercise_json:
                     exercise_object.muscles = exercise_json['muscles']
 
+                # If not specified (likely), grab the defaults from the configuration
+                if 'duration' in exercise_json:
+                    exercise_object.duration = exercise_json['duration']
+                else:
+                    exercise_object.duration = configuration.decoded_object.ExerciseDurationDefault
+                if 'sets' in exercise_json:
+                    exercise_object.sets = exercise_json['sets']
+                else:
+                    exercise_object.sets = configuration.decoded_object.ExerciseSetsDefault
+                if 'setCooldown' in exercise_json:
+                    exercise_object.setCooldown = exercise_json['setCooldown']
+                else:
+                    exercise_object.setCooldown = configuration.decoded_object.ExerciseSetCooldownDefault
+                if 'exerciseCooldown' in exercise_json:
+                    exercise_object.exerciseCooldown = exercise_json['exerciseCooldown']
+                else:
+                    exercise_object.exerciseCooldown = configuration.decoded_object.ExerciseCooldownDefault
+
+                exercise_object.total_duration = ((exercise_object.duration + exercise_object.setCooldown) * exercise_object.sets) + exercise_object.exerciseCooldown
+
                 self.__validate_exercise(exercise_database_object, exercise_object)
                 exercise_database_object.exercises.append(exercise_object)
 
         return exercise_database_object
 
-    def decode_exercise_database(self, exercise_database_filename):
-        return self.__decode_exercise_database(exercise_database_filename)
+    def decode_exercise_database(self, exercise_database_filename, configuration):
+        return self.__decode_exercise_database(exercise_database_filename, configuration)

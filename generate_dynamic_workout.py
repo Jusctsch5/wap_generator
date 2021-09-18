@@ -1,6 +1,7 @@
  #!python3
 import argparse
 import os
+from dynamic_workout_decoder import DynamicWorkoutDecoder
 from workout_decoder import WorkoutDecoder
 from workout import Workout
 from configuration_decoder import ConfigurationDecoder
@@ -14,7 +15,7 @@ def main():
     
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("workout",                 help="Provide a workout json file ")
+    parser.add_argument("workout",                 help="Provide a dynamic workout json file ")
     parser.add_argument("-c", "--configuration",   help="Provide an optional configuration json file")
     parser.add_argument("-p", "--playlist",        help="Provide an optional playlist json file")
     parser.add_argument("-e", "--exercise-database",      help="Provide an optional exercise database")
@@ -27,9 +28,9 @@ def main():
 
     if args.exercise_database:
         exercise_database_decoder = ExerciseDatabaseDecoder()
-        exercise_database = exercise_database_decoder.decode_exercise_database(args.exercise_database)
+        exercise_database = exercise_database_decoder.decode_exercise_database(args.exercise_database, configuration)
 
-    workout_decoder = WorkoutDecoder()
+    workout_decoder = DynamicWorkoutDecoder()
     workout = workout_decoder.decode_workout(args.workout, exercise_database, configuration)
     workout.generate_total_clip(configuration.decoded_object.OutputDirectory)
 

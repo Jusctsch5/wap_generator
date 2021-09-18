@@ -6,5 +6,10 @@
     "ShuffleExercises": false,
     "CrossFade": true,
     "OutputDirectory": "C:\\Users\\schum\\Dropbox\\Workout",
-    "AdditionalSongDirectory": "C:\\Users\\schum\\Dropbox\\Stepmania\\Songs"
-  }
+    "AdditionalSongDirectory": "C:\\Users\\schum\\Dropbox\\Stepmania\\Songs",
+    "ExerciseDurationDefault": 30,
+    "ExerciseSetsDefault": 3,
+    "ExerciseSetCooldownDefault": 10,
+    "ExerciseCooldownDefault": 30
+}
+  

@@ -25,3 +25,20 @@ class ExerciseDatabase:
             exercise.musclegroups = exercise_from_db.musclegroups
             exercise.muscles = exercise_from_db.muscles
         return exercise
+
+    def get_exercises_from_muscle_group(self, musclegroup):
+        exercises = []
+        for exercise in self.exercises:
+            if musclegroup in exercise.musclegroups:
+                exercises.append(exercise)
+
+        return exercises
+
+    def get_exercises_from_muscle_groups(self, musclegroups):
+        exercises = []
+        for musclegroup in musclegroups:
+            returned_exercises = self.get_exercises_from_muscle_group(musclegroup)
+            exercises.extend(x for x in returned_exercises if x not in exercises)
+
+        return exercises            
+

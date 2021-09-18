@@ -18,3 +18,4 @@ class Exercise:
         self.sets = 0
         self.setCooldown = 0
         self.exerciseCooldown = 0
+        self.total_duration = 0

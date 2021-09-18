@@ -17,8 +17,8 @@ class AnnouncerWrapper:
         self.engine = pyttsx3.init()
         self.session_uuid = uuid.uuid4()
         self.clip_index = 0
-        self.countdown_five = ""
-        self.change_sides = ""
+        self.countdown_five = None
+        self.change_sides = None
 
     def __get_short_uuid_str(self):
         return str(self.session_uuid).split('-')[0]
@@ -55,6 +55,7 @@ class AnnouncerWrapper:
         self.engine.save_to_file("change sides", name)
         self.engine.runAndWait()
         self.change_sides = AudioSegment.from_file(name)
+        print("Done configuring wrapper")
 
     def create_voice_clip(self, clip):
 
