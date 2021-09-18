@@ -50,6 +50,7 @@ class AnnouncerWrapper:
             total_clip += clip
         self.countdown_five = total_clip
 
+        # Generate canned phrase for changing sides.
         name = os.path.join("temp", "change_sides.mp3")
         self.engine.save_to_file("change sides", name)
         self.engine.runAndWait()

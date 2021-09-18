@@ -3,26 +3,27 @@
         "chest", "back", "arms", "abdominals", "legs", "shoulders"
     ],
     "muscles":[
-        "obliques",
-        "glutes", "hip flexors", "quadriceps", "calves", "hamstrings", 
+        
         
         "biceps",
+        "abs", "obliques",
+        "glutes", "hip flexors", "quadriceps", "calves", "hamstrings", 
         "deltoid", "rotator cuff"
     ],
     "exercises": [
         {
             "name": "High Standing Crunch",
-            "description": "Using high suspended bands from standing position, bring your back forward, pulling down your arms",
+            "description": "Using high suspended bands from standing position, back to the wall, bring your rigcage down, incidentally pulling the bands down",
             "id": "7755798c-647c-45c3-9c05-a434699c68bc",
             "musclegroups": ["abdominals"],
-            "muscles":["abdominals"]
+            "muscles":["abs", "obliques"]
         },
         {
             "name": "Curl to Front Squat",
             "description": "Standing up straight with arms at sides, holding bands. Hook bands on feet. Perform a dumbell curl and squat down, keeping back straight.",
             "id": "598ae548-4fca-445b-a5d1-1a64b0ffe3ab",
             "musclegroups": ["legs", "arms"],
-            "muscles":["gluteus maximus", "hip flexors", "quadriceps", "abdominals", "calves", "biceps"]
+            "muscles":["glutes", "hip flexors", "quadriceps", "abs", "calves", "biceps"]
         },        
         {
             "name": "High Downward Oblique Swing",
@@ -30,7 +31,7 @@
             "id": "e968f38d-b35f-44e0-b77c-4ec88812c9da",
             "alternatesidesbetweensets": true,
             "musclegroups": ["abdominals"],
-            "muscles": ["abdominals", "oblique"]
+            "muscles": ["abs", "obliques"]
         },
         {
             "name": "Middle Pallof Press",
@@ -38,7 +39,7 @@
             "id": "d20ca7bb-f653-4aa9-9c06-6c0f87304631",
             "alternatesidesbetweensets": true,
             "musclegroups": ["abdominals", "arms"],
-            "muscles": ["abdominals", "oblique", "glutes"]
+            "muscles": ["abs", "obliques", "glutes"]
         },
         {
             "name": "Middle 180 Twists",
@@ -51,7 +52,8 @@
             "description": "Using low suspended bands from standing position, with fists together, rotate body while pulling bands across and up your body. Arms should remain straight. Switch between sets",
             "alternatesidesbetweensets": true,
             "id": "eb53860f-a1e6-4e9f-802a-24cb692d47e7",
-            "musclegroups": ["abdominals", "oblique"]
+            "musclegroups": ["abdominals"],
+            "muscles": ["obliques"]
         },
         {
             "name": "Low Deadbug Dual Knee Ins",
@@ -84,7 +86,7 @@
         {
             "name": "Lying Leg Extensions",
             "description": "Laying down, hook both bands to your feet. Lay the band under you and grab it. Take your legs and send them vertical, making an L.",
-            "id": "70415c22-73ff-44b6-88ee-375fc9622476",
+            "id": "16200201-9302-450f-8ed3-fc6ca1d0c439",
             "musclegroups": ["legs"],
             "muscles": [ "quadriceps"]
         },
@@ -113,13 +115,13 @@
         {
             "name": "Seated Rows",
             "description": "Sit down with legs out. Hook bands on feet. Pull to upper chest with rowing motion.",
-            "id": "dfa835d5-f69b-4839-8be9-f26dd5eecb8e",
+            "id": "0bf8089b-32b8-42b5-b589-c850453143b5",
             "musclegroups": ["arms"]
         },
         {
             "name": "Alt Low Crossover",
             "description": "Standing with arms down at your sides. Hook bands on one or more feet. Perform dumbbell curl across body.",
-            "id": "0e310266-3e16-43e9-88f3-e1e2be1f900d",
+            "id": "0e310266-3e16-43e9-88f3-e1e2be1f900e",
             "musclegroups": ["arms"]
         },
         {

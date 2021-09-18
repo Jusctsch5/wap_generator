@@ -7,6 +7,8 @@ class ExerciseDatabase:
 
     def __init__(self):
         self.exercises = []
+        self.musclegroups = []
+        self.muscles = []
 
     def __get_exercise_from_id(self, id):
         for exercise_entry in self.exercises:
