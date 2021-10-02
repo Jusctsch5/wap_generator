@@ -29,8 +29,8 @@ class Workout:
                 # Create announcement of workout
                 print("Creating workout: " + self.name)
                 total_clip = announcer_wrapper.create_voice_clip("Starting workout:" + self.name + 
-                                                                    " in " + str(self.start_delay) + " seconds." +
-                                                                    " first exercise will be: " + exercise.name)
+                                                                 " in " + str(self.start_delay) + " seconds." +
+                                                                 " first exercise will be: " + exercise.name)
 
                 # Create starting delay
                 if configuration.decoded_object.ReadDescription == True:

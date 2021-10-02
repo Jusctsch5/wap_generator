@@ -15,7 +15,7 @@ class Playlist:
 
     def __find_song_name(self, playlist_directory, name):
         for path in Path(playlist_directory).rglob(name):
-            print("Found path:" +str(path))
+            # print("Found path:" +str(path))
             return path
 
     def create_combined_clip(self, workout, configuration):
@@ -45,7 +45,7 @@ class Playlist:
                 song_segment = AudioSegment.from_file(resulting_name)
                 song_segment = song_segment.apply_gain(-12)
                 if configuration.decoded_object.CrossFade == True and playlist_clip.duration_seconds != 0:
-                    print("Applying crossfade")
+                    # print("Applying crossfade")
                     playlist_clip = playlist_clip.append(song_segment, crossfade=2500)
                 else:
                     playlist_clip += song_segment

@@ -69,7 +69,7 @@ class AnnouncerWrapper:
         path = os.path.dirname(os.path.abspath(__file__))
         name = os.path.join(path, name)
 
-        print("Creating new voiceclip with name: " + name)
+        # print("Creating new voiceclip with name: " + name)
         clip = AudioSegment.from_file(name)
         self.clip_index = self.clip_index + 1
 

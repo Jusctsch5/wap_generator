@@ -35,7 +35,9 @@ class ExerciseDatabaseDecoder:
         
         # Validate against the db for valid muscles and groups
         for muscle in exercise_object.muscles:
-            if not muscle in exercise_database_object.muscles:
+            if (not muscle in exercise_database_object.armsmuscles and
+               not muscle in exercise_database_object.abdominalsmuscles and
+               not muscle in exercise_database_object.legsmuscles):
                 raise ValueError("Exercise {} has an invalid muscle: {}".format(exercise_object.name, muscle))
 
         for musclegroup in exercise_object.musclegroups:
@@ -54,8 +56,10 @@ class ExerciseDatabaseDecoder:
 
         with open(exercise_database_filename) as f:
             exercise_database_json = json.load(f)
-            exercise_database_object.muscles = exercise_database_json["muscles"]
             exercise_database_object.musclegroups = exercise_database_json["musclegroups"]
+            exercise_database_object.armsmuscles = exercise_database_json["armsmuscles"]
+            exercise_database_object.abdominalsmuscles = exercise_database_json["abdominalsmuscles"]
+            exercise_database_object.legsmuscles = exercise_database_json["legsmuscles"]
 
             exercises_json = exercise_database_json["exercises"]
             for exercise_json in exercises_json:

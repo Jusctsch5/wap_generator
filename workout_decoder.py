@@ -22,6 +22,8 @@ class WorkoutDecoder:
             x = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
 
         workout = Workout(x)
+        workout.start_delay = workout.decoded_object.startDelay
+        workout.finish_delay = workout.decoded_object.finishDelay
 
         # If specified, shuffle the provided exercises
         if configuration.decoded_object.ShuffleExercises:

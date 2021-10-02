@@ -1,3 +1,4 @@
+import random
 
 class ExerciseDatabase:
 
@@ -8,7 +9,9 @@ class ExerciseDatabase:
     def __init__(self):
         self.exercises = []
         self.musclegroups = []
-        self.muscles = []
+        self.armsmuscles = []
+        self.abdominalsmuscles = []
+        self.legsmuscles = []
 
     def __get_exercise_from_id(self, id):
         for exercise_entry in self.exercises:
@@ -23,7 +26,10 @@ class ExerciseDatabase:
             exercise.description = exercise_from_db.description
             exercise.alternatesidesbetweensets = exercise_from_db.alternatesidesbetweensets
             exercise.musclegroups = exercise_from_db.musclegroups
-            exercise.muscles = exercise_from_db.muscles
+            exercise.armsmuscles = exercise_from_db.armsmuscles
+            exercise.abdominalsmuscles = exercise_from_db.abdominalsmuscles
+            exercise.legsmuscles = exercise_from_db.legsmuscles
+
         return exercise
 
     def get_exercises_from_muscle_group(self, musclegroup):
@@ -39,6 +45,36 @@ class ExerciseDatabase:
         for musclegroup in musclegroups:
             returned_exercises = self.get_exercises_from_muscle_group(musclegroup)
             exercises.extend(x for x in returned_exercises if x not in exercises)
+        return exercises
 
-        return exercises            
+    def get_exercises_for_muscle(self, muscle):
+        exercises_for_muscle = []
+        for exercise in self.exercises:
+            if muscle in exercise.muscles:
+                exercises_for_muscle.append(exercise)
 
+        return exercises_for_muscle            
+
+    def get_muscles_in_muscle_group(self, musclegroup):
+        if musclegroup == "arms" : return self.armsmuscles
+        if musclegroup == "legs" : return self.legsmuscles
+        if musclegroup == "abdominals" : return self.abdominalsmuscles
+        return None      
+
+    def get_new_exercise_helper(self, exercises, excluded_exercises):
+        random.shuffle(exercises)
+
+        for exercise in exercises:
+            foundNewOne = True
+            for existing_exercise in excluded_exercises:
+                if exercise.id == existing_exercise.id: 
+                    foundNewOne = False
+                    break
+            if foundNewOne is True:
+                return exercise
+
+
+        print("Unable to find new exercise. Using {} instead".format(exercise.name))
+        return exercise
+
+        

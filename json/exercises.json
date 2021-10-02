@@ -1,14 +1,15 @@
 {
     "musclegroups": [
-        "chest", "back", "arms", "abdominals", "legs", "shoulders"
+        "back", "arms", "abdominals", "legs"
     ],
-    "muscles":[
-        
-        
-        "biceps",
-        "abs", "obliques",
-        "glutes", "hip flexors", "quadriceps", "calves", "hamstrings", 
-        "deltoid", "rotator cuff"
+    "armsmuscles":[
+        "biceps", "triceps", "deltoids", "rotatorcuff", "traps"
+    ],
+    "abdominalsmuscles": [
+        "pecs", "abs", "obliques"
+    ],
+    "legsmuscles":[
+        "adductor", "glutes", "hipflexors", "quads", "calves", "hamstrings"
     ],
     "exercises": [
         {
@@ -23,7 +24,7 @@
             "description": "Standing up straight with arms at sides, holding bands. Hook bands on feet. Perform a dumbell curl and squat down, keeping back straight.",
             "id": "598ae548-4fca-445b-a5d1-1a64b0ffe3ab",
             "musclegroups": ["legs", "arms"],
-            "muscles":["glutes", "hip flexors", "quadriceps", "abs", "calves", "biceps"]
+            "muscles":["glutes", "hipflexors", "quads", "abs", "calves", "biceps"]
         },        
         {
             "name": "High Downward Oblique Swing",
@@ -66,14 +67,14 @@
             "description": "Standing up straight with arms at sides. Hook bands on feet. Bend knees to chair position and back.",
             "id": "3d7f94b9-344e-47b7-a2f0-770cf49e8718",
             "musclegroups": ["abdominals", "legs"],
-            "muscles": ["glutes", "hip flexors", "quadriceps", "calves", "hamstrings"]       
+            "muscles": ["glutes", "hipflexors", "quads", "calves", "hamstrings"]       
         },
         {
             "name": "Romanian Deadlift",
             "description": "Standing up straight with arms at sides. Hook bands on feet. Bend and touch your toes. Keep back straight and head up.",
             "id": "dfa835d5-f69b-4839-8be9-f26dd5eecb8e",
             "musclegroups": ["abdominals", "legs"],
-            "muscles": [ "hamstrings", "glutes", "hip flexors"]
+            "muscles": [ "hamstrings", "glutes", "hipflexors"]
         },
         {
             "name": "Glute Kickbacks",
@@ -81,21 +82,21 @@
             "id": "adde769c-42b8-4cc1-807a-9547be75bace",
             "alternatesidesbetweensets": true,
             "musclegroups": ["legs"],
-            "muscles": [ "hamstrings", "glutes", "hip flexors"]
+            "muscles": [ "hamstrings", "glutes", "hipflexors"]
         },
         {
             "name": "Lying Leg Extensions",
             "description": "Laying down, hook both bands to your feet. Lay the band under you and grab it. Take your legs and send them vertical, making an L.",
             "id": "16200201-9302-450f-8ed3-fc6ca1d0c439",
             "musclegroups": ["legs"],
-            "muscles": [ "quadriceps"]
+            "muscles": [ "quads"]
         },
         {
             "name": "Glute Bridge",
             "description": "Laying down, holding bands in your hands, tight over your chest. Bring torso up.",
             "id": "1cc41dbd-3803-45ed-bc2c-5fde86514327",
-            "musclegroups": ["abdominals", "chest"],
-            "muscles": [ "biceps", "glutes"]
+            "musclegroups": ["abdominals"],
+            "muscles": [ "hamstrings", "glutes"]
         },
         {
             "name": "Hip Abductors",
@@ -110,79 +111,106 @@
             "description": "One leg in front, one back. Band in both hands, looped on your front leg. Lunge down and back up. Alternate legs",
             "id": "0e310266-3e16-43e9-88f3-e1e2be1f900d",
             "alternatesidesbetweensets": true,
-            "musclegroups": ["abdominals"]
+            "musclegroups": ["legs"],
+            "muscles": [ "hamstrings", "glutes", "quads"]
         },
         {
             "name": "Seated Rows",
-            "description": "Sit down with legs out. Hook bands on feet. Pull to upper chest with rowing motion.",
+            "description": "Sit down with legs out. Hook bands on feet. Pull bands back to waist with rowing motion.",
             "id": "0bf8089b-32b8-42b5-b589-c850453143b5",
-            "musclegroups": ["arms"]
+            "musclegroups": ["arms"],
+            "muscles": ["traps", "rotatorcuff" ]
         },
+        {
+            "name": "Seated Wide Rows",
+            "description": "Sit down with legs out. Hook bands on feet. Pull to upper chest with rowing motion.",
+            "id": "0bf8089b-32b8-42b5-b589-c850453143b7",
+            "musclegroups": ["arms"],
+            "muscles": ["traps", "rotatorcuff" ]
+        },        
+        {
+            "name": "High to Low Rows",
+            "description": "Get down on one knee, grasp high suspended bands. Pull down to upper chest with rowing motion.",
+            "id": "0bf8089b-32b8-42b5-b589-c850453143b8",
+            "musclegroups": ["arms"],
+            "muscles": ["traps", "rotatorcuff" ]
+        },        
         {
             "name": "Alt Low Crossover",
             "description": "Standing with arms down at your sides. Hook bands on one or more feet. Perform dumbbell curl across body.",
             "id": "0e310266-3e16-43e9-88f3-e1e2be1f900e",
-            "musclegroups": ["arms"]
+            "musclegroups": ["arms"],
+            "muscles": ["biceps"]
+
         },
         {
             "name": "Pull Aparts",
             "description": "Standing with arms out, level with shoulders. Pull to t-pose. Band should never be slack.",
             "id": "21755c9c-aadb-4647-bd31-d210aa012f29",
-            "musclegroups": ["arms"]
+            "musclegroups": ["arms"],
+            "muscles": ["traps", "deltoids"]
         },
         {
             "name": "High Crossover",
-            "description": "Standing with arms in front. Hook bands on one or more feet. Pull up to shoulder height in front with slight elbow bend.",
+            "description": "Standing with arms in front. Hook bands on one or more feet. Pull up to shoulder height with straight arms in front",
             "id": "d18bf756-f363-47a0-829e-3d2817c44552",
-            "musclegroups": ["arms"]
+            "musclegroups": ["arms"],
+            "muscles": ["biceps"]
         },
         {
             "name": "Bicep Curls",
             "description": "Standing with arms at your sides. Hook bands on one or more feet. Perform Dumbbell curls.",
             "id": "18be59a8-56a4-4a28-bf72-4990a7a5f835",
-            "musclegroups": ["arms"]
+            "musclegroups": ["arms"],
+            "muscles": ["biceps"]
         },
         {
             "name": "Shoulder Lat Raise",
             "description": "Standing with arms down at sides. Pull up to t-pose.",
             "id": "eb7e70e0-485d-45f7-a054-2eadb74dcdcc",
-            "musclegroups": ["arms"]
+            "musclegroups": ["arms"],
+            "muscles": ["traps", "deltoids"]
         },
         {
             "name": "Side Bends",
             "description": "Standing with arms down at sides. lay band under both feet, hold one end of the band. perform a side bend, with the resting position providing tension to the band",
             "id": "eb7e70e1-485d-45f7-a054-2eadb74dcdcc",
-            "musclegroups": ["abdominals", "shoulders"]
-        },        
+            "musclegroups": ["abdominals"]
+        },
         {
             "name": "Overhead Triceps Extension",
             "description": "Standing with arms above. Hook bands on back foot, behind body. Pull up arms so they are straight.",
             "id": "7c9b9a0e-bcfe-4ef6-8844-c33ee86ff834",
-            "musclegroups": ["arms"]
+            "musclegroups": ["arms"],
+            "muscles": ["triceps"]
         },
         {
             "name": "Arnold Press",
             "description": "Standing with arms up in front of your chest. Hook band on foot. Pull up to mostly straight arms, with elbows in front.",
             "id": "72bce0ab-7f68-42df-9594-0f4f905b7d24",
-            "musclegroups": ["arms"]
+            "musclegroups": ["arms"],
+            "muscle": ["triceps", "traps", "deltoids"]
         },
         {
             "name": "Shoulder Press",
             "description": "Standing with arms up along-side your chest. Hook band on foot. Pull up to mostly straight arms, with elbows in alongside.",
             "id": "b732171a-d81a-4b19-b742-d6434b046bdf",
-            "musclegroups": ["arms"]
+            "musclegroups": ["arms"],
+            "muscles": ["deltoids", "triceps", "traps", "pecs"]
         },        
         {
             "name": "Push Ups",
             "description": "On all fours, push up and down.",
             "id": "17cefddc-afba-4bad-bd68-14fe20b6d8e8",
-            "musclegroups": ["arms", "chest", "shoulders", "abdominals"]
+            "musclegroups": ["arms", "abdominals"],
+            "muscles": ["abs", "pecs", "deltoids", "triceps"]
         },
         {
             "name": "Spiderman Crunches",
             "description": "On all fours, activate your core and move one leg up to your chest. alternate legs within each set.",
             "id": "1cc45dbd-3803-45ed-bc2c-5fde86514327",
-            "musclegroups": ["abdominals"]
+            "musclegroups": ["abdominals"],
+            "muscles": ["abs"]
         }
     ]
 }

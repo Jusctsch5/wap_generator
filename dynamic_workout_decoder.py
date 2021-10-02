@@ -22,6 +22,8 @@ class DynamicWorkoutDecoder:
             x = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
 
         workout = Workout(x)
+        workout.start_delay = workout.decoded_object.startDelay
+        workout.finish_delay = workout.decoded_object.finishDelay
 
         """
         Examples of Schema:
@@ -42,17 +44,34 @@ class DynamicWorkoutDecoder:
         random.shuffle(exercises)
         total_duration = 0
         max_duration = workout.decoded_object.durationMinutes * 60
-        done = False
-        while(1):
-            for i in range(0, len(exercises)):
-                exercise = exercises[i]
-                total_duration += exercise.total_duration
-                print("Adding exercise: {} to workout. TotalDuration:{}/{}".format(exercise.name, total_duration, max_duration))
-                workout.exercises.append(exercise)
-                if total_duration >= max_duration:
-                    done = True
-                    break
-            if done == True: break
+
+        muscles_to_work = []
+        for group in workout.decoded_object.musclegroups:
+            muscles_to_work.extend(exercise_database.get_muscles_in_muscle_group(group))
+
+
+        # First work all of the muscle groups with different exercises
+        for muscle in muscles_to_work:
+            exercises_for_muscle = exercise_database.get_exercises_for_muscle(muscle)
+            random.shuffle(exercises_for_muscle)
+
+            # Try to find a new exercise
+            exercise = exercise_database.get_new_exercise_helper(exercises, workout.exercises)
+
+            total_duration += exercise.total_duration
+            print("Adding exercise: {} for required muscle:{} to workout. TotalDuration:{}/{}".format(exercise.name, muscle, total_duration, max_duration))
+            workout.exercises.append(exercise)
+            if total_duration >= max_duration:
+                break
+
+        # Then plug exercises until the workout is complete
+        while(total_duration < max_duration):
+
+            exercise = exercise_database.get_new_exercise_helper(exercises, workout.exercises)
+
+            total_duration += exercise.total_duration
+            print("Adding exercise: {} to workout. TotalDuration:{}/{}".format(exercise.name, total_duration, max_duration))
+            workout.exercises.append(exercise)
 
         workout.transform_exercises_to_clip(configuration, self.announcer_wrapper)
         return workout
