@@ -8,14 +8,18 @@ class Workout:
     """
 
     def __init__(self, i_decoded_object):
-        self.name = ""
         self.decoded_object = i_decoded_object
+
+        # Fields from the decoded object
+        self.name = ""
         self.exercises = []
+        self.start_delay = 0
+        self.finish_delay = 0
+
+        # Resulting fields
         self.clips = []
         self.total_clip = None
         self.mp3_filename = ""
-        self.start_delay = 0
-        self.finish_delay = 0
 
     def generate_json():
         pass

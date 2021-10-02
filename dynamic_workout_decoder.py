@@ -22,6 +22,7 @@ class DynamicWorkoutDecoder:
             x = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
 
         workout = Workout(x)
+        workout.name = workout.decoded_object.name
         workout.start_delay = workout.decoded_object.startDelay
         workout.finish_delay = workout.decoded_object.finishDelay
 
