@@ -41,7 +41,7 @@ def main():
         playlist = Playlist(None)
         playlist.create_playlist_from_directory = configuration.decoded_object.CreatePlaylistFromDirectory
     if playlist is not None:
-        playlist.create_combined_clip(workout, configuration)
+        playlist.create_combined_clip(workout, configuration.decoded_object.OutputDirectory, configuration)
 
 if __name__ == '__main__':
     main()

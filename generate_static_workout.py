@@ -36,7 +36,7 @@ def main():
     if args.playlist:
         playlist_decoder = PlaylistDecoder()
         playlist = playlist_decoder.decode_playlist(args.playlist, configuration)
-        playlist.create_combined_clip(workout, configuration)
+        playlist.create_combined_clip(workout, configuration.decoded_object.OutputDirectory, configuration)
 
 if __name__ == '__main__':
     main()

@@ -13,7 +13,6 @@ from exercise_database import ExerciseDatabase
 def main():
     
     parser = argparse.ArgumentParser()
-
     parser.add_argument("regimen",                 help="Provide a regimen json file ")
     parser.add_argument("-c", "--configuration",   help="Provide an optional configuration json file")
     parser.add_argument("-p", "--playlist",        help="Provide an optional playlist json file")
@@ -29,18 +28,16 @@ def main():
         exercise_database_decoder = ExerciseDatabaseDecoder()
         exercise_database = exercise_database_decoder.decode_exercise_database(args.exercise_database, configuration)
 
-    regimen_decoder = RegimenDecoder()
-    regimen = regimen_decoder.decode_regimen(args.regimen, exercise_database, configuration)
-    regimen.process_regimen(configuration.decoded_object.OutputDirectory)
-
     if args.playlist:
         playlist_decoder = PlaylistDecoder()
         playlist = playlist_decoder.decode_playlist(args.playlist, configuration)
     elif configuration.decoded_object.CreatePlaylistFromDirectory is True:
         playlist = Playlist(None)
         playlist.create_playlist_from_directory = configuration.decoded_object.CreatePlaylistFromDirectory
-    #if playlist is not None:
-        #playlist.create_combined_clip(workout, configuration)
+
+    regimen_decoder = RegimenDecoder()
+    regimen = regimen_decoder.decode_regimen(args.regimen, exercise_database, configuration)
+    regimen.process_regimen(configuration.decoded_object.OutputDirectory, configuration, playlist)
 
 if __name__ == '__main__':
     main()

@@ -28,14 +28,13 @@ class Playlist:
 
         return list_of_songs
 
-    def create_combined_clip(self, workout, configuration):
+    def create_combined_clip(self, workout, output_dir, configuration):
         
         workout_duration = workout.total_clip.duration_seconds
         resulting_clip = workout.total_clip
 
         playlist_directory = configuration.decoded_object.AdditionalSongDirectory
         shuffle = configuration.decoded_object.ShufflePlaylist
-        output_dir = configuration.decoded_object.OutputDirectory
 
         list_of_songs = []
         if self.create_playlist_from_directory is True:
