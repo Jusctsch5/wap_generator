@@ -25,7 +25,7 @@ class AnnouncerWrapper:
 
     def configure(self, configuration):
         path = os.path.dirname(os.path.abspath(__file__))
-        print("Configure AudioSegment with ffmpeg: " + path)
+        # print("Configure AudioSegment with ffmpeg: " + path)
         AudioSegment.ffmpeg = path
 
         # Configure the text-to-speech engine
@@ -55,7 +55,6 @@ class AnnouncerWrapper:
         self.engine.save_to_file("change sides", name)
         self.engine.runAndWait()
         self.change_sides = AudioSegment.from_file(name)
-        print("Done configuring wrapper")
 
     def create_voice_clip(self, clip):
 

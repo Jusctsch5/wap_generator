@@ -15,6 +15,7 @@ class Workout:
         self.exercises = []
         self.start_delay = 0
         self.finish_delay = 0
+        self.total_duration = 0
 
         # Resulting fields
         self.clips = []
@@ -31,7 +32,7 @@ class Workout:
             exercise  = self.exercises[exercise_i]
             if first is True:
                 # Create announcement of workout
-                print("Creating workout: " + self.name)
+                print("Creating clip for workout: " + self.name)
                 total_clip = announcer_wrapper.create_voice_clip("Starting workout:" + self.name + 
                                                                  " in " + str(self.start_delay) + " seconds." +
                                                                  " first exercise will be: " + exercise.name)
@@ -43,7 +44,7 @@ class Workout:
                     total_clip += announcer_wrapper.create_delay_with_countdown(self.start_delay)
                 first = False
 
-            print("Creating exercise: " + exercise.name)
+            print("Creating clip for exercise: " + exercise.name)
 
             total_clip += announcer_wrapper.create_voice_clip("Starting exercise:" + exercise.name)
 
@@ -95,6 +96,8 @@ class Workout:
         else:
             resulting_name = os.path.join(output_dir, resulting_name)
 
+        if (os.path.exists(os.path.dirname(resulting_name)) is False):
+            os.makedirs(os.path.dirname(resulting_name))
         print("Creating new total workout clip with name: " + resulting_name)
         file_handle = self.total_clip.export(resulting_name, format="mp3")
         self.mp3_filename = resulting_name

@@ -1,0 +1,35 @@
+{
+    "days":
+    [
+        {
+            "name": "Monday",
+            "workouts":[
+                {
+                    "name": "1 Dynamic Arms Workout",
+                    "musclegroups": ["arms"],
+                    "durationMinutes": 5
+                },
+                {
+                    "name": "2 Dynamic Abs Workout",
+                    "musclegroups": ["abdominals"],
+                    "durationMinutes": 5
+                }
+            ]
+        },
+        {
+            "name": "Tuesday",
+            "workouts":[
+                {
+                    "name": "1 Dynamic Legs Workout",
+                    "musclegroups": ["legs"],
+                    "durationMinutes": 5
+                },
+                {
+                    "name": "2 Dynamic Abs Workout",
+                    "musclegroups": ["abdominals"],
+                    "durationMinutes": 5
+                }
+            ]
+        }
+    ]
+}

@@ -22,13 +22,23 @@ class WorkoutDecoder:
             x = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
 
         workout = Workout(x)
-        workout.start_delay = workout.decoded_object.startDelay
-        workout.finish_delay = workout.decoded_object.finishDelay
+        workout.name = workout.decoded_object.name
+        if hasattr('workout.decoded_object', 'startDelay'):
+            workout.start_delay = workout.decoded_object.startDelay
+        else:
+            workout.start_delay = configuration.decoded_object.WorkoutStartDelayMinutesDefault
+        if hasattr('workout.decoded_object', 'finishDelay'):
+            workout.finish_delay = workout.decoded_object.finishDelay
+        else:
+            workout.finish_delay = configuration.decoded_object.WorkoutFinishDelayMinutesDefault
+        if hasattr('workout.decoded_object', 'durationMinutes'):
+            workout.total_duration = workout.decoded_object.durationMinutes
+        else:
+            workout.total_duration = configuration.decoded_object.WorkoutDurationMinutesDefault
 
         # If specified, shuffle the provided exercises
         if configuration.decoded_object.ShuffleExercises:
             random.shuffle(workout.decoded_object.exercises)
-
 
         """
         Examples of Schema:

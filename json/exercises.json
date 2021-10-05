@@ -1,6 +1,6 @@
 {
     "musclegroups": [
-        "back", "arms", "abdominals", "legs"
+        "arms", "abdominals", "legs"
     ],
     "armsmuscles":[
         "biceps", "triceps", "deltoids", "rotatorcuff", "traps"

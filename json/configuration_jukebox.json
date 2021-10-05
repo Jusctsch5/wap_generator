@@ -11,6 +11,9 @@
     "ExerciseDurationDefault": 30,
     "ExerciseSetsDefault": 3,
     "ExerciseSetCooldownDefault": 10,
-    "ExerciseCooldownDefault": 30
+    "ExerciseCooldownDefault": 30,
+    "WorkoutDurationMinutesDefault": 20,
+    "WorkoutStartDelayMinutesDefault": 20,
+    "WorkoutFinishDelayMinutesDefault": 60
 }
   

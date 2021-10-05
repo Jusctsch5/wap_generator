@@ -15,16 +15,23 @@ class DynamicWorkoutDecoder:
     def __init__(self):
         self.announcer_wrapper = AnnouncerWrapper()
 
-    def __decode_workout(self, workout_filename, exercise_database, configuration):
+    def __decode_workout(self, workout_json, exercise_database, configuration):
         self.announcer_wrapper.configure(configuration)
 
-        with open(workout_filename) as f:
-            x = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
-
-        workout = Workout(x)
+        workout = Workout(workout_json)
         workout.name = workout.decoded_object.name
-        workout.start_delay = workout.decoded_object.startDelay
-        workout.finish_delay = workout.decoded_object.finishDelay
+        if hasattr('workout.decoded_object', 'startDelay'):
+            workout.start_delay = workout.decoded_object.startDelay
+        else:
+            workout.start_delay = configuration.decoded_object.WorkoutStartDelayMinutesDefault
+        if hasattr('workout.decoded_object', 'finishDelay'):
+            workout.finish_delay = workout.decoded_object.finishDelay
+        else:
+            workout.finish_delay = configuration.decoded_object.WorkoutFinishDelayMinutesDefault
+        if hasattr('workout.decoded_object', 'durationMinutes'):
+            workout.total_duration = workout.decoded_object.durationMinutes
+        else:
+            workout.total_duration = configuration.decoded_object.WorkoutDurationMinutesDefault
 
         """
         Examples of Schema:
@@ -46,10 +53,11 @@ class DynamicWorkoutDecoder:
         total_duration = 0
         max_duration = workout.decoded_object.durationMinutes * 60
 
+        print("Creating workout: {} for muscle groups: {}.".format(workout.name, workout.decoded_object.musclegroups))
+
         muscles_to_work = []
         for group in workout.decoded_object.musclegroups:
             muscles_to_work.extend(exercise_database.get_muscles_in_muscle_group(group))
-
 
         # First work all of the muscle groups with different exercises
         for muscle in muscles_to_work:
@@ -60,7 +68,7 @@ class DynamicWorkoutDecoder:
             exercise = exercise_database.get_new_exercise_helper(exercises, workout.exercises)
 
             total_duration += exercise.total_duration
-            print("Adding exercise: {} for required muscle:{} to workout. TotalDuration:{}/{}".format(exercise.name, muscle, total_duration, max_duration))
+            print("Adding exercise: {} for required muscle:{} to workout:{}. TotalDuration:{}/{}".format(exercise.name, muscle, workout.name, total_duration, max_duration))
             workout.exercises.append(exercise)
             if total_duration >= max_duration:
                 break
@@ -71,11 +79,17 @@ class DynamicWorkoutDecoder:
             exercise = exercise_database.get_new_exercise_helper(exercises, workout.exercises)
 
             total_duration += exercise.total_duration
-            print("Adding exercise: {} to workout. TotalDuration:{}/{}".format(exercise.name, total_duration, max_duration))
+            print("Adding exercise: {} to workout:{}. TotalDuration:{}/{}".format(exercise.name, workout.name, total_duration, max_duration))
             workout.exercises.append(exercise)
 
         workout.transform_exercises_to_clip(configuration, self.announcer_wrapper)
         return workout
 
     def decode_workout(self, workout_filename, exercise_database, configuration):
-        return self.__decode_workout(workout_filename, exercise_database, configuration)
+        with open(workout_filename) as f:
+            x = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
+
+        return self.decode_workout_json(x, exercise_database, configuration)
+        
+    def decode_workout_json(self, workout_json, exercise_database, configuration):
+        return self.__decode_workout(workout_json, exercise_database, configuration)

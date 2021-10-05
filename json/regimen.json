@@ -1,0 +1,105 @@
+{
+    "days":
+    [
+        {
+            "name": "Monday",
+            "workouts":[
+                {
+                    "name": "1 Dynamic Arms Workout",
+                    "musclegroups": ["arms"],
+                    "durationMinutes": 20
+                },
+                {
+                    "name": "2 Dynamic Abs Workout",
+                    "musclegroups": ["abdominals"],
+                    "durationMinutes": 15
+                }
+            ]
+        },
+        {
+            "name": "Tuesday",
+            "workouts":[
+                {
+                    "name": "1 Dynamic Legs Workout",
+                    "musclegroups": ["legs"],
+                    "durationMinutes": 20
+                },
+                {
+                    "name": "2 Dynamic Abs Workout",
+                    "musclegroups": ["abdominals"],
+                    "durationMinutes": 15
+                }
+            ]
+        },
+        {
+            "name": "Wednesday",
+            "workouts":[
+                {
+                    "name": "1 Dynamic Arms Workout",
+                    "musclegroups": ["arms"],
+                    "durationMinutes": 20
+                },
+                {
+                    "name": "2 Dynamic Abs Workout",
+                    "musclegroups": ["abdominals"],
+                    "durationMinutes": 15
+                }
+            ]
+        },
+        {
+            "name": "Thursday",
+            "workouts":[
+                {
+                    "name": "1 Dynamic Legs Workout",
+                    "musclegroups": ["legs"],
+                    "durationMinutes": 20
+                },
+                {
+                    "name": "2 Dynamic Abs Workout",
+                    "musclegroups": ["abdominals"],
+                    "durationMinutes": 15
+                }
+            ]
+        },
+        {
+            "name": "Friday",
+            "workouts":[
+                {
+                    "name": "1 Dynamic Workout",
+                    "musclegroups": ["legs",  "arms", "abdominals"],
+                    "durationMinutes": 40
+                }
+            ]
+        },
+        {
+            "name": "Saturday",
+            "workouts":[
+                {
+                    "name": "1 Dynamic Arms Workout",
+                    "musclegroups": ["arms"],
+                    "durationMinutes": 20
+                },
+                {
+                    "name": "2 Dynamic Abs Workout",
+                    "musclegroups": ["abdominals"],
+                    "durationMinutes": 20
+                }
+            ]
+        },
+        {
+            "name": "Sunday",
+            "workouts":[
+                {
+                    "name": "1 Dynamic Legs Workout",
+                    "musclegroups": ["legs"],
+                    "durationMinutes": 20
+                },
+                {
+                    "name": "2 Dynamic Abs Workout",
+                    "musclegroups": ["abdominals"],
+                    "durationMinutes": 20
+                }
+            ]
+        }
+    ]
+}
