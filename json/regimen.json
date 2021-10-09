@@ -2,7 +2,7 @@
     "days":
     [
         {
-            "name": "Monday",
+            "name": "1 Monday",
             "workouts":[
                 {
                     "name": "1 Dynamic Arms Workout",
@@ -17,7 +17,7 @@
             ]
         },
         {
-            "name": "Tuesday",
+            "name": "2 Tuesday",
             "workouts":[
                 {
                     "name": "1 Dynamic Legs Workout",
@@ -32,7 +32,7 @@
             ]
         },
         {
-            "name": "Wednesday",
+            "name": "3 Wednesday",
             "workouts":[
                 {
                     "name": "1 Dynamic Arms Workout",
@@ -47,7 +47,7 @@
             ]
         },
         {
-            "name": "Thursday",
+            "name": "4 Thursday",
             "workouts":[
                 {
                     "name": "1 Dynamic Legs Workout",
@@ -62,7 +62,7 @@
             ]
         },
         {
-            "name": "Friday",
+            "name": "5 Friday",
             "workouts":[
                 {
                     "name": "1 Dynamic Workout",
@@ -72,7 +72,7 @@
             ]
         },
         {
-            "name": "Saturday",
+            "name": "6 Saturday",
             "workouts":[
                 {
                     "name": "1 Dynamic Arms Workout",
@@ -87,7 +87,7 @@
             ]
         },
         {
-            "name": "Sunday",
+            "name": "7 Sunday",
             "workouts":[
                 {
                     "name": "1 Dynamic Legs Workout",
