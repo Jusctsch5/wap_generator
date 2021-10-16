@@ -28,6 +28,7 @@ def main():
         exercise_database_decoder = ExerciseDatabaseDecoder()
         exercise_database = exercise_database_decoder.decode_exercise_database(args.exercise_database, configuration)
 
+    playlist = None
     if args.playlist:
         playlist_decoder = PlaylistDecoder()
         playlist = playlist_decoder.decode_playlist(args.playlist, configuration)

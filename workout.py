@@ -1,5 +1,6 @@
 import os
 from announcer_wrapper import AnnouncerWrapper
+from pydub.playback import play
 
 class Workout:
 
@@ -88,8 +89,7 @@ class Workout:
         self.total_clip = total_clip
         return self.total_clip
 
-    def generate_total_clip(self, output_dir):
-
+    def generate_total_clip(self, output_dir, configuration):
         resulting_name = self.decoded_object.name + ".mp3"
         if output_dir == "":
             resulting_name = os.path.join("result", resulting_name)
@@ -98,6 +98,9 @@ class Workout:
 
         if (os.path.exists(os.path.dirname(resulting_name)) is False):
             os.makedirs(os.path.dirname(resulting_name))
+
         print("Creating new total workout clip with name: " + resulting_name)
-        file_handle = self.total_clip.export(resulting_name, format="mp3")
-        self.mp3_filename = resulting_name
+        if configuration.decoded_object.Autoplay:
+            play(self.total_clip)
+        else:
+            file_handle = self.total_clip.export(resulting_name, format="mp3")

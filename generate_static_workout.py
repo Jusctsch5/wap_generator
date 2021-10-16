@@ -33,7 +33,7 @@ def main():
     workout = workout_decoder.decode_workout(args.workout, exercise_database, configuration)
 
     if args.playlist is None:
-        workout.generate_total_clip(configuration.decoded_object.OutputDirectory)
+        workout.generate_total_clip(configuration.decoded_object.OutputDirectory, configuration)
     else:
         playlist_decoder = PlaylistDecoder()
         playlist = playlist_decoder.decode_playlist(args.playlist, configuration)

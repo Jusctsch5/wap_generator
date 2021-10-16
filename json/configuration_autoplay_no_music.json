@@ -1,0 +1,20 @@
+{
+    "AnnouncementVolume": 1.0,
+    "EndTracksOnExercise": false,
+    "ReadDescription": true,
+    "ShufflePlaylist": true,
+    "ShuffleExercises": false,
+    "CrossFade": true,
+    "OutputDirectory": "C:\\Users\\schum\\Dropbox\\Workout",
+    "AdditionalSongDirectory": "",
+    "CreatePlaylistFromDirectory": false,
+    "ExerciseDurationDefault": 30,
+    "ExerciseSetsDefault": 3,
+    "ExerciseSetCooldownDefault": 10,
+    "ExerciseCooldownDefault": 30,
+    "WorkoutDurationMinutesDefault": 20,
+    "WorkoutStartDelayMinutesDefault": 20,
+    "WorkoutFinishDelayMinutesDefault": 60,
+    "Autoplay": true
+}
+  
