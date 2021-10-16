@@ -1,5 +1,6 @@
 import os
 from pydub import AudioSegment
+from pydub.playback import play
 import random
 from pathlib import Path
 import datetime
@@ -59,7 +60,6 @@ class Playlist:
                 song_segment = AudioSegment.from_file(song)
                 song_segment = song_segment.apply_gain(-12)
                 if configuration.decoded_object.CrossFade == True and playlist_clip.duration_seconds != 0:
-                    # print("Applying crossfade")
                     playlist_clip = playlist_clip.append(song_segment, crossfade=2500)
                 else:
                     playlist_clip += song_segment
@@ -75,7 +75,6 @@ class Playlist:
             if shuffle:
                 random.shuffle(self.decoded_object.playlist)
 
-
         print("Resulting playlist file is {} seconds".format(playlist_clip.duration_seconds))
         resulting_clip = resulting_clip.overlay(playlist_clip)
         print("Resulting workout file is {} seconds".format(resulting_clip.duration_seconds))
@@ -83,8 +82,17 @@ class Playlist:
         resulting_name = workout.decoded_object.name + "_" + str(datetime.date.today()).replace("-", "_") + "_" + "WithPlaylist.mp3"
         resulting_name = os.path.join(output_dir, resulting_name)
 
+        if (os.path.exists(os.path.dirname(os.path.dirname(resulting_name))) is False):
+            os.makedirs(os.path.dirname(os.path.dirname(resulting_name)))
+
         print("Creating new total workout clip and playlist with name: " + resulting_name)
-        file_handle = resulting_clip.export(resulting_name, format="mp3")
+        if configuration.decoded_object.Autoplay:
+            play(resulting_clip)
+        else:
+            file_handle = resulting_clip.export(resulting_name, format="mp3")
+        
+        
+
             
 
         

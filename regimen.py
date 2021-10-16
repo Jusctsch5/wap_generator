@@ -25,8 +25,8 @@ class Regimen:
             print("Generating clip or regimen on day: {}".format(day.name))
             day_directory = os.path.join(output_directory, self.id, day.name)
             for workout in day.workouts:
-                workout.generate_total_clip(day_directory)
-
-                if playlist is not None:
+                if playlist is None:
+                    workout.generate_total_clip(day_directory)
+                else:
                     playlist.create_combined_clip(workout, day_directory, configuration)
 

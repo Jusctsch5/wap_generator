@@ -99,7 +99,7 @@
             "muscles": [ "hamstrings", "glutes"]
         },
         {
-            "name": "Hip Abductors",
+            "name": "Leg Lifts",
             "description": "Standing up, with one band hooked on your leg and the other under your other foot. Extend leg out to the side. Alternate between sets",
             "id": "203ac060-a815-4e62-bc01-f830dbcfd0d2",
             "alternatesidesbetweensets": true,
@@ -141,7 +141,6 @@
             "id": "0e310266-3e16-43e9-88f3-e1e2be1f900e",
             "musclegroups": ["arms"],
             "muscles": ["biceps"]
-
         },
         {
             "name": "Pull Aparts",
@@ -211,6 +210,36 @@
             "id": "1cc45dbd-3803-45ed-bc2c-5fde86514327",
             "musclegroups": ["abdominals"],
             "muscles": ["abs"]
-        }
+        },
+        {
+            "name": "Jumping Jacks with Resistance Loop",
+            "description": "Place resistance loop between legs, perform jumping jacks.",
+            "id": "1cc45ded-3803-45ed-bc2c-5fde86514327",
+            "musclegroups": ["legs"],
+            "muscles": ["glutes", "quads", "hipflexors"]
+        },
+        {
+            "name": "Lateral Band Walk with Resistance Loop",
+            "description": "Place resistance loop between legs, side step, keeping legs never further than shoulder width apart.",
+            "id": "1cc4fded-3803-45ed-bc2c-5fde86514327",
+            "musclegroups": ["legs"],
+            "muscles": ["glutes", "quads"]
+        },
+        {
+            "name": "Fire Hydrant",
+            "description": "Go down on hands and knees, place resistance loop just above knees. Engaging your glutes and outer thighs, lift your knee out to the side without shifting your hips. Change sides between sets",
+            "id": "1cd45ded-3803-45ed-bc2c-5fde86514327",
+            "alternatesidesbetweensets": true,
+            "musclegroups": ["legs"],
+            "muscles": ["glutes", "quads"]
+        },
+        {
+            "name": "Clamshell",
+            "description": "Go down on your side, place resistance loop just above knees, bent to 90 degrees. Prop your head up on your hand, rest it on your biceps, or support yourself with your lower arm. Engage your core, keep your feet pressed together, and drive your top knee toward the ceiling as far as you can without compensating form. Changes sides between sets",
+            "id": "2cd45ded-3803-45ed-bc2c-5fde86514327",
+            "alternatesidesbetweensets": true,
+            "musclegroups": ["legs"],
+            "muscles": ["glutes", "obliques"]
+        }                   
     ]
 }

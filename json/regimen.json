@@ -2,100 +2,100 @@
     "days":
     [
         {
-            "name": "1 Monday",
+            "name": "Monday",
             "workouts":[
                 {
-                    "name": "1 Dynamic Arms Workout",
+                    "name": "Dynamic Arms Workout",
                     "musclegroups": ["arms"],
                     "durationMinutes": 20
                 },
                 {
-                    "name": "2 Dynamic Abs Workout",
+                    "name": "Dynamic Abs Workout",
                     "musclegroups": ["abdominals"],
-                    "durationMinutes": 15
+                    "durationMinutes": 10
                 }
             ]
         },
         {
-            "name": "2 Tuesday",
+            "name": "Tuesday",
             "workouts":[
                 {
-                    "name": "1 Dynamic Legs Workout",
+                    "name": "Dynamic Legs Workout",
                     "musclegroups": ["legs"],
                     "durationMinutes": 20
                 },
                 {
-                    "name": "2 Dynamic Abs Workout",
+                    "name": "Dynamic Abs Workout",
                     "musclegroups": ["abdominals"],
-                    "durationMinutes": 15
+                    "durationMinutes": 10
                 }
             ]
         },
         {
-            "name": "3 Wednesday",
+            "name": "Wednesday",
             "workouts":[
                 {
-                    "name": "1 Dynamic Arms Workout",
+                    "name": "Dynamic Arms Workout",
                     "musclegroups": ["arms"],
                     "durationMinutes": 20
                 },
                 {
-                    "name": "2 Dynamic Abs Workout",
+                    "name": "Dynamic Abs Workout",
                     "musclegroups": ["abdominals"],
                     "durationMinutes": 15
                 }
             ]
         },
         {
-            "name": "4 Thursday",
+            "name": "Thursday",
             "workouts":[
                 {
-                    "name": "1 Dynamic Legs Workout",
+                    "name": "Dynamic Legs Workout",
                     "musclegroups": ["legs"],
                     "durationMinutes": 20
                 },
                 {
-                    "name": "2 Dynamic Abs Workout",
+                    "name": "Dynamic Abs Workout",
                     "musclegroups": ["abdominals"],
                     "durationMinutes": 15
                 }
             ]
         },
         {
-            "name": "5 Friday",
+            "name": "Friday",
             "workouts":[
                 {
-                    "name": "1 Dynamic Workout",
+                    "name": "Dynamic Workout",
                     "musclegroups": ["legs",  "arms", "abdominals"],
                     "durationMinutes": 40
                 }
             ]
         },
         {
-            "name": "6 Saturday",
+            "name": "Saturday",
             "workouts":[
                 {
-                    "name": "1 Dynamic Arms Workout",
+                    "name": "Dynamic Arms Workout",
                     "musclegroups": ["arms"],
                     "durationMinutes": 20
                 },
                 {
-                    "name": "2 Dynamic Abs Workout",
+                    "name": "Dynamic Abs Workout",
                     "musclegroups": ["abdominals"],
                     "durationMinutes": 20
                 }
             ]
         },
         {
-            "name": "7 Sunday",
+            "name": "Sunday",
             "workouts":[
                 {
-                    "name": "1 Dynamic Legs Workout",
+                    "name": "Dynamic Legs Workout",
                     "musclegroups": ["legs"],
                     "durationMinutes": 20
                 },
                 {
-                    "name": "2 Dynamic Abs Workout",
+                    "name": "Dynamic Abs Workout",
                     "musclegroups": ["abdominals"],
                     "durationMinutes": 20
                 }
