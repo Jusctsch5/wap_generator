@@ -25,6 +25,7 @@ class ExerciseDatabase:
             exercise.name = exercise_from_db.name
             exercise.description = exercise_from_db.description
             exercise.alternatesidesbetweensets = exercise_from_db.alternatesidesbetweensets
+            exercise.equipment = exercise_from_db.equipment
             exercise.musclegroups = exercise_from_db.musclegroups
             exercise.armsmuscles = exercise_from_db.armsmuscles
             exercise.abdominalsmuscles = exercise_from_db.abdominalsmuscles
