@@ -44,6 +44,11 @@ class ExerciseDatabaseDecoder:
             if not musclegroup in exercise_database_object.musclegroups:
                 raise ValueError("Exercise {} has an invalid musclegroup: {}".format(exercise_object.name, musclegroup))
 
+        # Validate against valid equipment
+        for equip in exercise_object.equipment:
+            if not equip in exercise_database_object.equipment:
+                raise ValueError("Exercise {} has an invalid equipment: {}".format(exercise_object.name, equip))
+
         # Validate against other exercises for unique fields
         for exercise in exercise_database_object.exercises:
             if exercise_object.id == exercise.id:
@@ -56,6 +61,9 @@ class ExerciseDatabaseDecoder:
 
         with open(exercise_database_filename) as f:
             exercise_database_json = json.load(f)
+
+            # Defines the "global" allowed set of values, to be used by the exercises
+            exercise_database_object.equipment = exercise_database_json["equipment"]
             exercise_database_object.musclegroups = exercise_database_json["musclegroups"]
             exercise_database_object.armsmuscles = exercise_database_json["armsmuscles"]
             exercise_database_object.abdominalsmuscles = exercise_database_json["abdominalsmuscles"]
@@ -67,6 +75,7 @@ class ExerciseDatabaseDecoder:
                 print(str(exercise_json))
                 exercise_object.name = exercise_json['name']
                 exercise_object.description = exercise_json['description']
+                exercise_object.equipment = exercise_json['equipment']
                 exercise_object.id = exercise_json['id']
                 if 'alternatesidesbetweensets' in exercise_json:
                     exercise_object.alternatesidesbetweensets = exercise_json['alternatesidesbetweensets']

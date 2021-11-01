@@ -1,4 +1,5 @@
 from exercise import Exercise
+from exercise_database_filter import ExerciseDatabaseFilter
 from workout import Workout
 from announcer_wrapper import AnnouncerWrapper
 from types import SimpleNamespace
@@ -20,6 +21,10 @@ class DynamicWorkoutDecoder:
 
         workout = Workout(workout_json)
         workout.name = workout.decoded_object.name
+        if hasattr('workout.decoded_object', 'equipment'):
+            workout.equipment = workout.decoded_object.equipment
+        else:
+            workout.equipment = []
         if hasattr('workout.decoded_object', 'startDelay'):
             workout.start_delay = workout.decoded_object.startDelay
         else:
@@ -39,34 +44,46 @@ class DynamicWorkoutDecoder:
         "dynamicworkout":
         {
             "name": "Dynamic Arms Workout",
+            "equipment" ["resistanceband"],
             "musclegroups": ["arms"],
             "workoutduration": 20
         }
 
+        equipment defines what you have available.
         musclegroups defines what muscles to work. a muscle not included in one of these groups will NOT be chosen.
         Multiple groups can be chosen to work on. Muscle groups are defined in the provided exercise database.
         Workout duration is defined in minutes
         """
         
-        exercises = exercise_database.get_exercises_from_muscle_groups(workout.decoded_object.musclegroups)
+        filter = ExerciseDatabaseFilter(None, workout.decoded_object.musclegroups, workout.equipment)
+        exercises = exercise_database.get_exercises_from_filter(filter)
         random.shuffle(exercises)
         total_duration = 0
         max_duration = workout.decoded_object.durationMinutes * 60
 
-        print("Creating workout: {} for muscle groups: {}.".format(workout.name, workout.decoded_object.musclegroups))
+        print("Creating workout: {} for equipment: {} muscle groups: {}.".format(workout.name, 
+                                                                                 workout.decoded_object.equipment, 
+                                                                                 workout.decoded_object.musclegroups))
 
         muscles_to_work = []
+
         for group in workout.decoded_object.musclegroups:
             muscles_to_work.extend(exercise_database.get_muscles_in_muscle_group(group))
 
-        # First work all of the muscle groups with different exercises
+        # First try and work all of the muscle groups with different exercises
         for muscle in muscles_to_work:
-            exercises_for_muscle = exercise_database.get_exercises_for_muscle(muscle)
+            filter = ExerciseDatabaseFilter(muscle, [], workout.decoded_object.equipment)
+
+            print("Finding exercises for required muscle:{}".format(muscle))
+            exercises_for_muscle = exercise_database.get_exercises_from_filter(filter)
             random.shuffle(exercises_for_muscle)
 
-            # Try to find a new exercise
-            exercise = exercise_database.get_new_exercise_helper(exercises, workout.exercises)
+            # Try to find a new exercise for this muscle.
+            exercise = exercise_database.get_new_exercise_helper(exercises_for_muscle, workout.exercises)
+            if exercise is None:
+                continue
 
+            # Add it
             total_duration += exercise.total_duration
             print("Adding exercise: {} for required muscle:{} to workout:{}. TotalDuration:{}/{}".format(exercise.name, muscle, workout.name, total_duration, max_duration))
             workout.exercises.append(exercise)

@@ -33,6 +33,52 @@ class ExerciseDatabase:
 
         return exercise
 
+    def get_exercises_from_filter(self, filter):
+        exercises = []
+
+        for exercise in self.exercises:
+
+            # Make sure a muscle matches, if provided in the filter
+            match = False
+            if filter.muscle != None:
+                if filter.muscle in exercise.muscles:
+                    match = True
+            else:
+                match = True
+            if match is False:
+                print("Did not match exercise: {} based on muscle filter: {}".format(exercise.name, filter.muscle))
+                continue
+
+            # Make sure a muscle group matches, if provided in the filter
+            match = False
+            if len(filter.musclegroup) > 0:
+                for musclegroup in filter.musclegroup:
+                    if musclegroup in exercise.musclegroups:
+                        match = True
+                        break
+            else:
+                match = True
+            if match is False:
+                print("Did not match exercise: {} based on muscle group filter: {}".format(exercise.name, filter.musclegroup))
+                continue
+
+            # Make sure an equipment matches, if provided in the filter
+            match = False
+            if len(filter.equipment) > 0:
+                for equipment in filter.equipment:
+                    if equipment in exercise.equipment:
+                        match = True
+                        break
+            else:
+                match = True
+            if match is False:
+                print("Did not match exercise: {} based on equipment filter: {}".format(exercise.name, filter.equipment))
+                continue
+
+            exercises.append(exercise)
+
+        return exercises
+
     def get_exercises_from_muscle_group(self, musclegroup):
         exercises = []
         for exercise in self.exercises:
@@ -63,6 +109,10 @@ class ExerciseDatabase:
         return None      
 
     def get_new_exercise_helper(self, exercises, excluded_exercises):
+        if len(exercises) == 0:
+            print("No exercises passed in")
+            return None
+
         random.shuffle(exercises)
 
         for exercise in exercises:

@@ -313,7 +313,7 @@
             "id": "2ed45ded-f803-4eed-bc2c-5fde86f1432e",
             "equipment":["ring"],
             "musclegroups": ["arms"],
-            "muscles": ["triceps", "lats"]
+            "muscles": ["triceps"]
         },
         {
             "name": "Ring Back Press",
@@ -321,7 +321,7 @@
             "id": "2ed45ded-f803-45ed-bc2c-5fdf86f1432e",
             "equipment":["ring"],
             "musclegroups": ["arms"],
-            "muscles": ["shoulders"]
+            "muscles": ["rotatorcuff"]
         }
     ]
 }
