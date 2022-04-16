@@ -104,3 +104,4 @@ class Workout:
             play(self.total_clip)
         else:
             file_handle = self.total_clip.export(resulting_name, format="mp3")
+            

@@ -64,7 +64,7 @@ class ExerciseDatabase:
 
             # Make sure an equipment matches, if provided in the filter
             match = False
-            if len(filter.equipment) > 0:
+            if len(filter.equipment) and len(exercise.equipment)> 0:
                 for equipment in filter.equipment:
                     if equipment in exercise.equipment:
                         match = True

@@ -150,7 +150,7 @@
             "name": "High to Low Rows",
             "description": "Get down on one knee, grasp high suspended bands. Pull down to upper chest with rowing motion.",
             "id": "0bf8089b-32b8-42b5-b589-c850453143b8",
-            "equipment":["resistanceband"],            
+            "equipment":["suspendedband"],            
             "musclegroups": ["arms"],
             "muscles": ["traps", "rotatorcuff" ]
         },        
