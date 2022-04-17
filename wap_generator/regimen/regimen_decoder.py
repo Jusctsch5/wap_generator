@@ -2,7 +2,8 @@ from regimen import Regimen
 from regimen import Day
 from types import SimpleNamespace
 import json
-from dynamic_workout_decoder import DynamicWorkoutDecoder
+from wap_generator.workout.dynamic_workout_decoder import DynamicWorkoutDecoder
+
 
 class RegimenDecoder:
 
@@ -29,8 +30,10 @@ class RegimenDecoder:
             day.name = "{} {}".format(index, day_namespace.name)
             print("Creating workouts for day: {}".format(day.name))
             for workout_namespace in day_namespace.workouts:
-                workout_namespace.name = "{} {}".format(day_namespace.name, workout_namespace.name)
-                workout = dynamicWorkoutDecoder.decode_workout_json(workout_namespace, exercise_database, configuration)
+                workout_namespace.name = "{} {}".format(
+                    day_namespace.name, workout_namespace.name)
+                workout = dynamicWorkoutDecoder.decode_workout_json(
+                    workout_namespace, exercise_database, configuration)
                 day.workouts.append(workout)
             regimen.days.append(day)
 

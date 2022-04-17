@@ -1,6 +1,7 @@
-from playlist import Playlist
+from wap_generator.playlist.playlist import Playlist
 from types import SimpleNamespace
 import json
+
 
 class PlaylistDecoder:
 

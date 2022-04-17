@@ -1,6 +1,7 @@
-from configuration import Configuration
+from wap_generator.configuration.configuration import Configuration
 from types import SimpleNamespace
 import json
+
 
 class ConfigurationDecoder:
 

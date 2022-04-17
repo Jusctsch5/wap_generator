@@ -1,15 +1,15 @@
 import pyttsx3
-from configuration import Configuration
 import uuid
 import os.path
 import glob
 from pydub import AudioSegment
 import os
 
-class AnnouncerWrapper:
+
+class Announcer:
 
     """
-     AnnouncerWrapper - Wrap around whatever python library used for tts and give interfaces
+     Announcer - Wrap around whatever python library used for tts and give interfaces
                         that can be used by the decoders.
     """
 
@@ -19,31 +19,28 @@ class AnnouncerWrapper:
         self.clip_index = 0
         self.countdown_five = None
         self.change_sides = None
+        self.path = os.path.dirname(os.path.abspath(__file__))
+        self.samples_dir = os.path.join(self.path, "samples")
+        self.temp_dir = os.path.join(self.path, "temp")
 
     def __get_short_uuid_str(self):
         return str(self.session_uuid).split('-')[0]
 
     def configure(self, configuration):
-        path = os.path.dirname(os.path.abspath(__file__))
         # print("Configure AudioSegment with ffmpeg: " + path)
-        AudioSegment.ffmpeg = path
+        AudioSegment.ffmpeg = self.path
 
         # Configure the text-to-speech engine
-        self.engine.setProperty('volume', configuration.decoded_object.AnnouncementVolume)
-        self.engine.setProperty('rate', 145) # default 200
+        self.engine.setProperty(
+            'volume', configuration.decoded_object.AnnouncementVolume)
+        self.engine.setProperty('rate', 145)  # default 200
 
-        files = glob.glob('temp/*.mp3')
-        for f in files:
-            try:
-                os.remove(f)
-            except OSError as e:
-                print("Error: %s : %s" % (f, e.strerror))
-
-        name = os.path.join("temp", "countdown_five.mp3")
+        # Cache voice clips with desired announcer for better performance.
+        name = os.path.join(self.samples_dir, "countdown_five.mp3")
 
         # Try dynamically generating countdown with reasonable tempo
         total_clip = 0
-        for i in range(5,0, -1):
+        for i in range(5, 0, -1):
             self.engine.save_to_file(str(i), name)
             self.engine.runAndWait()
             clip = AudioSegment.from_file(name)
@@ -51,7 +48,7 @@ class AnnouncerWrapper:
         self.countdown_five = total_clip
 
         # Generate canned phrase for changing sides.
-        name = os.path.join("temp", "change_sides.mp3")
+        name = os.path.join(self.samples_dir, "change_sides.mp3")
         self.engine.save_to_file("change sides", name)
         self.engine.runAndWait()
         self.change_sides = AudioSegment.from_file(name)
@@ -59,9 +56,10 @@ class AnnouncerWrapper:
     def create_voice_clip(self, clip):
 
         # Make unique filename for voice clip
-        name = str(self.session_uuid).split('-')[0]  + "_" + str(self.clip_index) + ".mp3"
-        name = os.path.join("temp", name)
-        
+        name = str(self.session_uuid).split(
+            '-')[0] + "_" + str(self.clip_index) + ".mp3"
+        name = os.path.join(self.temp_dir, name)
+
         self.engine.save_to_file(clip, name)
         self.engine.runAndWait()
 
@@ -100,7 +98,8 @@ class AnnouncerWrapper:
 
     def generate_total_clip(self, total_clip, name, output_dir):
 
-        resulting_name = str(self.session_uuid).split('-')[0] + "_"+ name + ".mp3"
+        resulting_name = str(self.session_uuid).split(
+            '-')[0] + "_" + name + ".mp3"
         if output_dir == "":
             resulting_name = os.path.join("result", resulting_name)
         else:
@@ -109,5 +108,3 @@ class AnnouncerWrapper:
         print("Creating new total workout clip with name: " + resulting_name)
         file_handle = total_clip.export(resulting_name, format="mp3")
         return resulting_name
-
-    

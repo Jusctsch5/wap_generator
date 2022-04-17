@@ -1,13 +1,15 @@
 import os
 import uuid
-from dynamic_workout_decoder import DynamicWorkoutDecoder
-from playlist_decoder import PlaylistDecoder
-from playlist import Playlist
+from wap_generator.workout.dynamic_workout_decoder import DynamicWorkoutDecoder
+from wap_generator.playlist.playlist_decoder import PlaylistDecoder
+from wap_generator.playlist.playlist import Playlist
+
 
 class Day:
     def __init__(self):
         self.name = ""
         self.workouts = []
+
 
 class Regimen:
 
@@ -28,5 +30,5 @@ class Regimen:
                 if playlist is None:
                     workout.generate_total_clip(day_directory, configuration)
                 else:
-                    playlist.create_combined_clip(workout, day_directory, configuration)
-
+                    playlist.create_combined_clip(
+                        workout, day_directory, configuration)

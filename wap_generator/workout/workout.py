@@ -1,6 +1,7 @@
 import os
-from announcer_wrapper import AnnouncerWrapper
+from wap_generator.announcer.announcer import Announcer
 from pydub.playback import play
+
 
 class Workout:
 
@@ -17,6 +18,7 @@ class Workout:
         self.start_delay = 0
         self.finish_delay = 0
         self.total_duration = 0
+        self.muscle_groups = []
 
         # Resulting fields
         self.clips = []
@@ -30,35 +32,42 @@ class Workout:
 
         first = True
         for exercise_i in range(0, len(self.exercises)):
-            exercise  = self.exercises[exercise_i]
+            exercise = self.exercises[exercise_i]
             if first is True:
                 # Create announcement of workout
                 print("Creating clip for workout: " + self.name)
-                total_clip = announcer_wrapper.create_voice_clip("Starting workout:" + self.name + 
+                total_clip = announcer_wrapper.create_voice_clip("Starting workout:" + self.name +
                                                                  " in " + str(self.start_delay) + " seconds." +
                                                                  " first exercise will be: " + exercise.name)
 
                 # Create starting delay
                 if configuration.decoded_object.ReadDescription == True:
-                    total_clip += announcer_wrapper.create_voice_clip_wih_delay_and_countdown(exercise.description, self.start_delay)
-                else:   
-                    total_clip += announcer_wrapper.create_delay_with_countdown(self.start_delay)
+                    total_clip += announcer_wrapper.create_voice_clip_wih_delay_and_countdown(
+                        exercise.description, self.start_delay)
+                else:
+                    total_clip += announcer_wrapper.create_delay_with_countdown(
+                        self.start_delay)
                 first = False
 
             print("Creating clip for exercise: " + exercise.name)
 
-            total_clip += announcer_wrapper.create_voice_clip("Starting exercise:" + exercise.name)
+            total_clip += announcer_wrapper.create_voice_clip(
+                "Starting exercise:" + exercise.name)
 
             # Cache these clips over each set, to reduce calls to the wrapper.
-            exercise_duration_clip = announcer_wrapper.create_delay_with_countdown(exercise.duration)            
-            cooldown_statement_clip = announcer_wrapper.create_voice_clip("Set Cooldown for " + str(exercise.setCooldown) + " seconds.")
-            cooldown_duration_clip = announcer_wrapper.create_delay_with_countdown(exercise.setCooldown)
+            exercise_duration_clip = announcer_wrapper.create_delay_with_countdown(
+                exercise.duration)
+            cooldown_statement_clip = announcer_wrapper.create_voice_clip(
+                "Set Cooldown for " + str(exercise.setCooldown) + " seconds.")
+            cooldown_duration_clip = announcer_wrapper.create_delay_with_countdown(
+                exercise.setCooldown)
 
             # Perform an exercise
             for i in range(1, exercise.sets+1):
-                
+
                 # Add Exercise
-                total_clip += announcer_wrapper.create_voice_clip("Set " + str(i) + ". Ready Go!")                
+                total_clip += announcer_wrapper.create_voice_clip(
+                    "Set " + str(i) + ". Ready Go!")
                 total_clip += exercise_duration_clip
 
                 # Transition to the next set of the exercise, if it's not the last set.
@@ -70,21 +79,26 @@ class Workout:
 
             # If it's not the last exercise in the workout, announce the next one and give an exercise delay
             if exercise_i != len(self.exercises)-1:
-                clip = announcer_wrapper.create_voice_clip("Exercise Cooldown for " + str(exercise.exerciseCooldown) + 
-                                                                " seconds. Next Exercise will be " + 
-                                                                self.exercises[exercise_i+1].name)
+                clip = announcer_wrapper.create_voice_clip("Exercise Cooldown for " + str(exercise.exerciseCooldown) +
+                                                           " seconds. Next Exercise will be " +
+                                                           self.exercises[exercise_i+1].name)
                 total_clip = total_clip + clip
 
                 # After all sets in the exercise, give a finishing exercise cooldown.
                 if configuration.decoded_object.ReadDescription == True:
-                    total_clip += announcer_wrapper.create_voice_clip_wih_delay_and_countdown(self.exercises[exercise_i+1].description, exercise.exerciseCooldown)
-                else:   
-                    total_clip += announcer_wrapper.create_delay_with_countdown(exercise.exerciseCooldown)
+                    total_clip += announcer_wrapper.create_voice_clip_wih_delay_and_countdown(
+                        self.exercises[exercise_i+1].description, exercise.exerciseCooldown)
+                else:
+                    total_clip += announcer_wrapper.create_delay_with_countdown(
+                        exercise.exerciseCooldown)
 
         # After all exercises in the workout, give a finishing workout cooldown.
-        total_clip += announcer_wrapper.create_voice_clip("Exercises for workout:" + self.name + " Finished. Work it off for " + str(self.finish_delay) + " seconds")
-        total_clip += announcer_wrapper.create_delay_with_countdown(self.finish_delay)
-        total_clip += announcer_wrapper.create_voice_clip("Your Workout:" + self.name + " Finished. Great job.")
+        total_clip += announcer_wrapper.create_voice_clip(
+            "Exercises for workout:" + self.name + " Finished. Work it off for " + str(self.finish_delay) + " seconds")
+        total_clip += announcer_wrapper.create_delay_with_countdown(
+            self.finish_delay)
+        total_clip += announcer_wrapper.create_voice_clip(
+            "Your Workout:" + self.name + " Finished. Great job.")
 
         self.total_clip = total_clip
         return self.total_clip
@@ -104,4 +118,3 @@ class Workout:
             play(self.total_clip)
         else:
             file_handle = self.total_clip.export(resulting_name, format="mp3")
-            

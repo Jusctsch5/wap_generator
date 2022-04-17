@@ -1,10 +1,8 @@
-from types import SimpleNamespace
-import json
 
 class Exercise:
 
     """
-     Exercise - 
+     Exercise -
     """
 
     def __init__(self):

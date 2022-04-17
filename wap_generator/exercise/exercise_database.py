@@ -1,5 +1,6 @@
 import random
 
+
 class ExerciseDatabase:
 
     """
@@ -18,7 +19,7 @@ class ExerciseDatabase:
             if exercise_entry.id == id:
                 return exercise_entry
         return None
-    
+
     def create_populated_exercise_from_db(self, exercise):
         exercise_from_db = self.__get_exercise_from_id(exercise.id)
         if exercise_from_db:
@@ -46,7 +47,8 @@ class ExerciseDatabase:
             else:
                 match = True
             if match is False:
-                print("Did not match exercise: {} based on muscle filter: {}".format(exercise.name, filter.muscle))
+                print("Did not match exercise: {} based on muscle filter: {}".format(
+                    exercise.name, filter.muscle))
                 continue
 
             # Make sure a muscle group matches, if provided in the filter
@@ -59,12 +61,13 @@ class ExerciseDatabase:
             else:
                 match = True
             if match is False:
-                print("Did not match exercise: {} based on muscle group filter: {}".format(exercise.name, filter.musclegroup))
+                print("Did not match exercise: {} based on muscle group filter: {}".format(
+                    exercise.name, filter.musclegroup))
                 continue
 
             # Make sure an equipment matches, if provided in the filter
             match = False
-            if len(filter.equipment) and len(exercise.equipment)> 0:
+            if len(filter.equipment) and len(exercise.equipment) > 0:
                 for equipment in filter.equipment:
                     if equipment in exercise.equipment:
                         match = True
@@ -72,7 +75,8 @@ class ExerciseDatabase:
             else:
                 match = True
             if match is False:
-                print("Did not match exercise: {} based on equipment filter: {}".format(exercise.name, filter.equipment))
+                print("Did not match exercise: {} based on equipment filter: {}".format(
+                    exercise.name, filter.equipment))
                 continue
 
             exercises.append(exercise)
@@ -90,8 +94,10 @@ class ExerciseDatabase:
     def get_exercises_from_muscle_groups(self, musclegroups):
         exercises = []
         for musclegroup in musclegroups:
-            returned_exercises = self.get_exercises_from_muscle_group(musclegroup)
-            exercises.extend(x for x in returned_exercises if x not in exercises)
+            returned_exercises = self.get_exercises_from_muscle_group(
+                musclegroup)
+            exercises.extend(
+                x for x in returned_exercises if x not in exercises)
         return exercises
 
     def get_exercises_for_muscle(self, muscle):
@@ -100,13 +106,16 @@ class ExerciseDatabase:
             if muscle in exercise.muscles:
                 exercises_for_muscle.append(exercise)
 
-        return exercises_for_muscle            
+        return exercises_for_muscle
 
     def get_muscles_in_muscle_group(self, musclegroup):
-        if musclegroup == "arms" : return self.armsmuscles
-        if musclegroup == "legs" : return self.legsmuscles
-        if musclegroup == "abdominals" : return self.abdominalsmuscles
-        return None      
+        if musclegroup == "arms":
+            return self.armsmuscles
+        if musclegroup == "legs":
+            return self.legsmuscles
+        if musclegroup == "abdominals":
+            return self.abdominalsmuscles
+        return None
 
     def get_new_exercise_helper(self, exercises, excluded_exercises):
         if len(exercises) == 0:
@@ -118,14 +127,11 @@ class ExerciseDatabase:
         for exercise in exercises:
             foundNewOne = True
             for existing_exercise in excluded_exercises:
-                if exercise.id == existing_exercise.id: 
+                if exercise.id == existing_exercise.id:
                     foundNewOne = False
                     break
             if foundNewOne is True:
                 return exercise
 
-
         print("Unable to find new exercise. Using {} instead".format(exercise.name))
         return exercise
-
-        

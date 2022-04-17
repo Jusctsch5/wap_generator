@@ -1,24 +1,21 @@
  #!python3
 import argparse
 import os
-from regimen_decoder import RegimenDecoder
-from regimen import Regimen
-from configuration_decoder import ConfigurationDecoder
-from configuration import Configuration
-from playlist_decoder import PlaylistDecoder
-from playlist import Playlist
-from exercise_database_decoder import ExerciseDatabaseDecoder
-from exercise_database import ExerciseDatabase
+from wap_generator.regimen.regimen_decoder import RegimenDecoder
+from wap_generator.configuration.configuration_decoder import ConfigurationDecoder
+from wap_generator.playlist.playlist_decoder import PlaylistDecoder
+from wap_generator.playlist.playlist import Playlist
+from wap_generator.exercise.exercise_database_decoder import ExerciseDatabaseDecoder
 
 def main():
-    
+
     parser = argparse.ArgumentParser()
     parser.add_argument("regimen",                 help="Provide a regimen json file ")
     parser.add_argument("-c", "--configuration",   help="Provide an optional configuration json file")
     parser.add_argument("-p", "--playlist",        help="Provide an optional playlist json file")
     parser.add_argument("-e", "--exercise-database",      help="Provide an optional exercise database")
     args = parser.parse_args()
-    
+
     print("Launching Regimen Generator with arguments: " + str(args))
 
     configuration_decoder = ConfigurationDecoder()

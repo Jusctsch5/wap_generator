@@ -5,6 +5,7 @@ import random
 from pathlib import Path
 import datetime
 
+
 class Playlist:
 
     """
@@ -17,9 +18,10 @@ class Playlist:
         self.list_of_songs = []
 
     def __find_song_name(self, playlist_directory, name):
-        print("looking for song {} in playlist directory {}".format(name, playlist_directory))
+        print("looking for song {} in playlist directory {}".format(
+            name, playlist_directory))
         for path in Path(playlist_directory).rglob(name):
-            print("Found path:" +str(path))
+            print("Found path:" + str(path))
             return path
 
     def __get_list_of_songs_from_directory(self, directory):
@@ -30,7 +32,7 @@ class Playlist:
         return list_of_songs
 
     def create_combined_clip(self, workout, output_dir, configuration):
-        
+
         workout_duration = workout.total_clip.duration_seconds
         resulting_clip = workout.total_clip
 
@@ -39,13 +41,16 @@ class Playlist:
 
         list_of_songs = []
         if self.create_playlist_from_directory is True:
-            list_of_songs = self.__get_list_of_songs_from_directory(playlist_directory)
+            list_of_songs = self.__get_list_of_songs_from_directory(
+                playlist_directory)
         else:
             for song in self.decoded_object.playlist:
-                resulting_name = self.__find_song_name(playlist_directory, song.name)
+                resulting_name = self.__find_song_name(
+                    playlist_directory, song.name)
                 if resulting_name == "":
-                    print("Unable to find Song: {} from directory: {}".format(song, playlist_directory))
-                    continue                
+                    print("Unable to find Song: {} from directory: {}".format(
+                        song, playlist_directory))
+                    continue
                 list_of_songs.append(resulting_name)
 
         # If specified, shuffle the provided playlist
@@ -60,10 +65,11 @@ class Playlist:
                 song_segment = AudioSegment.from_file(song)
                 song_segment = song_segment.apply_gain(-12)
                 if configuration.decoded_object.CrossFade == True and playlist_clip.duration_seconds != 0:
-                    playlist_clip = playlist_clip.append(song_segment, crossfade=2500)
+                    playlist_clip = playlist_clip.append(
+                        song_segment, crossfade=2500)
                 else:
                     playlist_clip += song_segment
-                
+
                 print("Appending Song: {} to workout. Current Duration: {}, Workout Duration: {}"
                       .format(song, playlist_clip.duration_seconds, workout_duration))
 
@@ -75,11 +81,15 @@ class Playlist:
             if shuffle:
                 random.shuffle(self.decoded_object.playlist)
 
-        print("Resulting playlist file is {} seconds".format(playlist_clip.duration_seconds))
+        print("Resulting playlist file is {} seconds".format(
+            playlist_clip.duration_seconds))
         resulting_clip = resulting_clip.overlay(playlist_clip)
-        print("Resulting workout file is {} seconds".format(resulting_clip.duration_seconds))
+        print("Resulting workout file is {} seconds".format(
+            resulting_clip.duration_seconds))
 
-        resulting_name = workout.decoded_object.name + "_" + str(datetime.date.today()).replace("-", "_") + "_" + "WithPlaylist.mp3"
+        resulting_name = workout.decoded_object.name + "_" + \
+            str(datetime.date.today()).replace(
+                "-", "_") + "_" + "WithPlaylist.mp3"
         resulting_name = os.path.join(output_dir, resulting_name)
 
         if (os.path.exists(os.path.dirname(os.path.dirname(resulting_name))) is False):
@@ -90,9 +100,3 @@ class Playlist:
             play(resulting_clip)
         else:
             file_handle = resulting_clip.export(resulting_name, format="mp3")
-        
-        
-
-            
-
-        

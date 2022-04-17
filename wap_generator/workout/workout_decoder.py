@@ -1,10 +1,10 @@
-from exercise import Exercise
+from wap_generator.exercise.exercise import Exercise
 from workout import Workout
-from announcer_wrapper import AnnouncerWrapper
+from wap_generator.announcer.announcer import Announcer
 from types import SimpleNamespace
 import json
-from pydub import AudioSegment
 import random
+
 
 class WorkoutDecoder:
 
@@ -13,7 +13,7 @@ class WorkoutDecoder:
     """
 
     def __init__(self):
-        self.announcer_wrapper = AnnouncerWrapper()
+        self.announcer_wrapper = Announcer()
 
     def __decode_workout(self, workout_filename, exercise_database, configuration):
         self.announcer_wrapper.configure(configuration)
@@ -44,7 +44,7 @@ class WorkoutDecoder:
         Examples of Schema:
 
         Schema 1:
-        Exercise is defined in entirity. Exercise DB is not required. 
+        Exercise is defined in entirity. Exercise DB is not required.
         "exercises": [
             {
                 "name": "Hex Squats",
@@ -72,7 +72,7 @@ class WorkoutDecoder:
 
         Schema 1 will likely be deprecated, however no code below will have to change.
         """
-    
+
         # Loop over exercises and create voice clips introducing them
         for exercise_i in range(0, len(workout.decoded_object.exercises)):
 
@@ -86,11 +86,13 @@ class WorkoutDecoder:
             exercise.setCooldown = exercise_json.setCooldown
             exercise.exerciseCooldown = exercise_json.exerciseCooldown
             if exercise.id:
-                exercise = exercise_database.create_populated_exercise_from_db(exercise)
+                exercise = exercise_database.create_populated_exercise_from_db(
+                    exercise)
 
             workout.exercises.append(exercise)
 
-        workout.transform_exercises_to_clip(configuration, self.announcer_wrapper)
+        workout.transform_exercises_to_clip(
+            configuration, self.announcer_wrapper)
         return workout
 
     def decode_workout(self, workout_filename, exercise_database, configuration):
