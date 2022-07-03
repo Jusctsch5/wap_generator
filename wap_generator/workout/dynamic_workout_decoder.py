@@ -1,3 +1,4 @@
+from pathlib import Path, PurePath
 from wap_generator.exercise.exercise import Exercise
 from wap_generator.exercise.exercise_database_filter import ExerciseDatabaseFilter
 from .workout import Workout
@@ -12,6 +13,9 @@ class DynamicWorkoutDecoder:
     """
      DynamicWorkoutDecoder - Decodes input json workout file and creates a Workout class
     """
+
+    common_config_location = PurePath(
+        '.', 'user', 'workout_dynamic')
 
     def __init__(self):
         self.announcer_wrapper = Announcer()
@@ -103,8 +107,7 @@ class DynamicWorkoutDecoder:
         # Then plug exercises until the workout is complete
         while(total_duration < max_duration):
 
-            exercise = exercise_database.get_new_exercise_helper(
-                exercises, workout.exercises)
+            exercise = exercise_database.get_new_exercise_helper(exercises, workout.exercises)
 
             total_duration += exercise.total_duration
             print("Adding exercise: {} to workout:{}. TotalDuration:{}/{}".format(
@@ -123,3 +126,7 @@ class DynamicWorkoutDecoder:
 
     def decode_workout_json(self, workout_json, exercise_database, configuration):
         return self.__decode_workout(workout_json, exercise_database, configuration)
+
+    def get_common_workout_files(self):
+        p = Path(self.common_config_location).glob("*")
+        return [x for x in p if x.is_file()]

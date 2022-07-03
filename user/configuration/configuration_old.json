@@ -5,7 +5,8 @@
     "ShufflePlaylist": true,
     "ShuffleExercises": false,
     "CrossFade": true,
-    "AdditionalSongDirectory": "",
+    "OutputDirectory": "C:\\Users\\schum\\Dropbox\\Workout",
+    "AdditionalSongDirectory": "C:\\Users\\schum\\Dropbox\\Stepmania\\Songs",
     "CreatePlaylistFromDirectory": false,
     "ExerciseDurationDefault": 30,
     "ExerciseSetsDefault": 3,
@@ -13,7 +14,6 @@
     "ExerciseCooldownDefault": 30,
     "WorkoutDurationMinutesDefault": 20,
     "WorkoutStartDelayMinutesDefault": 20,
-    "WorkoutFinishDelayMinutesDefault": 60,
-    "Autoplay": true
+    "WorkoutFinishDelayMinutesDefault": 60
 }
-
+  

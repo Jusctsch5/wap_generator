@@ -1,3 +1,4 @@
+from pathlib import PurePath
 from wap_generator.exercise.exercise import Exercise
 from wap_generator.exercise.exercise_database import ExerciseDatabase
 import json
@@ -8,6 +9,9 @@ class ExerciseDatabaseDecoder:
     """
      ExerciseDatabaseDecoder - Decodes input json ExerciseDatabase file and creates a ExerciseDatabase class
     """
+
+    common_config_location = PurePath(
+        '.', 'user', 'exercises', 'exercises.json')
 
     def __init__(self):
         pass
@@ -125,3 +129,6 @@ class ExerciseDatabaseDecoder:
 
     def decode_exercise_database(self, exercise_database_filename, configuration):
         return self.__decode_exercise_database(exercise_database_filename, configuration)
+
+    def decode_common_exercise_database(self, configuration):
+        return self.decode_exercise_database(self.common_config_location, configuration)

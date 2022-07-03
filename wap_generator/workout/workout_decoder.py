@@ -15,6 +15,9 @@ class WorkoutDecoder:
     def __init__(self):
         self.announcer_wrapper = Announcer()
 
+    def __process_workout(self, exercise_database, configuration):
+        pass
+
     def __decode_workout(self, workout_filename, exercise_database, configuration):
         self.announcer_wrapper.configure(configuration)
 
@@ -86,13 +89,11 @@ class WorkoutDecoder:
             exercise.setCooldown = exercise_json.setCooldown
             exercise.exerciseCooldown = exercise_json.exerciseCooldown
             if exercise.id:
-                exercise = exercise_database.create_populated_exercise_from_db(
-                    exercise)
+                exercise = exercise_database.create_populated_exercise_from_db(exercise)
 
             workout.exercises.append(exercise)
 
-        workout.transform_exercises_to_clip(
-            configuration, self.announcer_wrapper)
+        workout.transform_exercises_to_clip(configuration, self.announcer_wrapper)
         return workout
 
     def decode_workout(self, workout_filename, exercise_database, configuration):
