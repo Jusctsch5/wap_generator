@@ -1,3 +1,4 @@
 {
-    "AnnouncementVolume": 1.0
+    "AnnouncementVolume": 1.0,
+    "RandomVoice": true
 }

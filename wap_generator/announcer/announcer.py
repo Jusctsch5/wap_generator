@@ -1,3 +1,4 @@
+import random
 import pyttsx3
 import uuid
 import os.path
@@ -13,7 +14,7 @@ class Announcer:
                         that can be used by the decoders.
     """
 
-    def __init__(self, volume):
+    def __init__(self, volume=1.0, random_voice=False, voice_name=""):
         self.engine = pyttsx3.init()
         self.session_uuid = uuid.uuid4()
         self.clip_index = 0
@@ -23,6 +24,9 @@ class Announcer:
         self.samples_dir = os.path.join(self.path, "samples")
         self.temp_dir = os.path.join(self.path, "temp")
         self.volume = volume
+        self.random_voice = random_voice
+        self.voice_name = voice_name
+        print(self.__dict__)
 
     def __get_short_uuid_str(self):
         return str(self.session_uuid).split('-')[0]
@@ -58,11 +62,22 @@ class Announcer:
         for voice in voices:
             print(voice.__dict__)
 
+        if self.voice_name:
+            for voice in voices:
+
+                if self.voice_name.lower() in voice.name.lower():
+                    print(f"Setting voice to {voice.name}")
+                    self.engine.setProperty('voice', voice.id)
+
+        if self.random_voice:
+            rand_voice = random.choice(voices)
+            print(f"Setting voice randomly to {voice.name}")
+            self.engine.setProperty('voice', rand_voice.id)
+
     def create_voice_clip(self, clip):
 
         # Make unique filename for voice clip
-        name = str(self.session_uuid).split(
-            '-')[0] + "_" + str(self.clip_index) + ".mp3"
+        name = str(self.session_uuid).split('-')[0] + "_" + str(self.clip_index) + ".mp3"
         name = os.path.join(self.temp_dir, name)
 
         self.engine.save_to_file(clip, name)
