@@ -1,3 +1,4 @@
+import logging
 import random
 
 
@@ -35,8 +36,9 @@ class ExerciseDatabase:
         return exercise
 
     def get_exercises_from_filter(self, filter):
-        exercises = []
 
+        # Apply filter across all exercises to find possible candidate matches.
+        exercises = []
         for exercise in self.exercises:
 
             # Make sure a muscle matches, if provided in the filter
@@ -47,8 +49,7 @@ class ExerciseDatabase:
             else:
                 match = True
             if match is False:
-                print("Did not match exercise: {} based on muscle filter: {}".format(
-                    exercise.name, filter.muscle))
+                logging.info(f"Did not match exercise: {exercise.name} based on muscle filter: {filter.muscle}")
                 continue
 
             # Make sure a muscle group matches, if provided in the filter
@@ -61,8 +62,7 @@ class ExerciseDatabase:
             else:
                 match = True
             if match is False:
-                print("Did not match exercise: {} based on muscle group filter: {}".format(
-                    exercise.name, filter.musclegroup))
+                logging.info(f"Did not match exercise: {exercise.name} based on muscle group filter: {filter.musclegroup}")
                 continue
 
             # Make sure an equipment matches, if provided in the filter
@@ -75,11 +75,13 @@ class ExerciseDatabase:
             else:
                 match = True
             if match is False:
-                print("Did not match exercise: {} based on equipment filter: {}".format(
-                    exercise.name, filter.equipment))
+                logging.info(f"Did not match exercise: {exercise.name} based on equipment filter: {filter.equipment}")
                 continue
 
             exercises.append(exercise)
+
+        if not exercises:
+            logging.error(f"No exercises matched based on filter:{str(filter)}")
 
         return exercises
 
@@ -94,10 +96,8 @@ class ExerciseDatabase:
     def get_exercises_from_muscle_groups(self, musclegroups):
         exercises = []
         for musclegroup in musclegroups:
-            returned_exercises = self.get_exercises_from_muscle_group(
-                musclegroup)
-            exercises.extend(
-                x for x in returned_exercises if x not in exercises)
+            returned_exercises = self.get_exercises_from_muscle_group(musclegroup)
+            exercises.extend(x for x in returned_exercises if x not in exercises)
         return exercises
 
     def get_exercises_for_muscle(self, muscle):
@@ -119,7 +119,7 @@ class ExerciseDatabase:
 
     def get_new_exercise_helper(self, exercises, excluded_exercises):
         if len(exercises) == 0:
-            print("No exercises passed in")
+            logging.error("No exercises passed in")
             return None
 
         random.shuffle(exercises)
@@ -133,5 +133,5 @@ class ExerciseDatabase:
             if foundNewOne is True:
                 return exercise
 
-        print("Unable to find new exercise. Using {} instead".format(exercise.name))
+        logging.error(f"Unable to find new exercise. Using {exercise.name} instead")
         return exercise

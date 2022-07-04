@@ -1,3 +1,4 @@
+import logging
 import os
 from pydub import AudioSegment
 from pydub.playback import play
@@ -7,7 +8,6 @@ import datetime
 
 
 class Playlist:
-
     """
      Playlist - Decodes input json workout file and creates a Playlist class
     """
@@ -18,10 +18,9 @@ class Playlist:
         self.list_of_songs = []
 
     def __find_song_name(self, playlist_directory, name):
-        print("looking for song {} in playlist directory {}".format(
-            name, playlist_directory))
+        logging.debug("looking for song {} in playlist directory {}".format(name, playlist_directory))
         for path in Path(playlist_directory).rglob(name):
-            print("Found path:" + str(path))
+            logging.debug("Found path:" + str(path))
             return path
 
     def __get_list_of_songs_from_directory(self, directory):
@@ -41,15 +40,12 @@ class Playlist:
 
         list_of_songs = []
         if self.create_playlist_from_directory is True:
-            list_of_songs = self.__get_list_of_songs_from_directory(
-                playlist_directory)
+            list_of_songs = self.__get_list_of_songs_from_directory(playlist_directory)
         else:
             for song in self.decoded_object.playlist:
-                resulting_name = self.__find_song_name(
-                    playlist_directory, song.name)
+                resulting_name = self.__find_song_name(playlist_directory, song.name)
                 if resulting_name == "":
-                    print("Unable to find Song: {} from directory: {}".format(
-                        song, playlist_directory))
+                    logging.error(f"Unable to find Song:{song} from directory:{playlist_directory}")
                     continue
                 list_of_songs.append(resulting_name)
 
@@ -65,14 +61,11 @@ class Playlist:
                 song_segment = AudioSegment.from_file(song)
                 song_segment = song_segment.apply_gain(-12)
                 if configuration.decoded_object.CrossFade == True and playlist_clip.duration_seconds != 0:
-                    playlist_clip = playlist_clip.append(
-                        song_segment, crossfade=2500)
+                    playlist_clip = playlist_clip.append(song_segment, crossfade=2500)
                 else:
                     playlist_clip += song_segment
 
-                print("Appending Song: {} to workout. Current Duration: {}, Workout Duration: {}"
-                      .format(song, playlist_clip.duration_seconds, workout_duration))
-
+                logging.debug(f"Appending Song:{song} to workout. Current Duration: {playlist_clip.duration_seconds}, Workout Duration: {workout_duration}")
                 if playlist_clip.duration_seconds >= workout_duration:
                     done = True
                     break
@@ -81,21 +74,18 @@ class Playlist:
             if shuffle:
                 random.shuffle(self.decoded_object.playlist)
 
-        print("Resulting playlist file is {} seconds".format(
-            playlist_clip.duration_seconds))
+        logging.debug(f"Resulting playlist file is {playlist_clip.duration_seconds} seconds")
         resulting_clip = resulting_clip.overlay(playlist_clip)
-        print("Resulting workout file is {} seconds".format(
-            resulting_clip.duration_seconds))
+        logging.debug(f"Resulting workout file is {resulting_clip.duration_seconds} seconds")
 
         resulting_name = workout.decoded_object.name + "_" + \
-            str(datetime.date.today()).replace(
-                "-", "_") + "_" + "WithPlaylist.mp3"
+            str(datetime.date.today()).replace("-", "_") + "_" + "WithPlaylist.mp3"
         resulting_name = os.path.join(output_dir, resulting_name)
 
         if (os.path.exists(os.path.dirname(os.path.dirname(resulting_name))) is False):
             os.makedirs(os.path.dirname(os.path.dirname(resulting_name)))
 
-        print("Creating new total workout clip and playlist with name: " + resulting_name)
+        logging.debug(f"Creating new total workout clip and playlist with name:{resulting_name} ")
         if configuration.decoded_object.Autoplay:
             play(resulting_clip)
         else:

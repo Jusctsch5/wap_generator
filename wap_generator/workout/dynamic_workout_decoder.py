@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path, PurePath
 from wap_generator.exercise.exercise_database_filter import ExerciseDatabaseFilter
 from .workout import Workout
@@ -38,9 +39,6 @@ class DynamicWorkoutDecoder:
             workout.total_duration = workout.decoded_object.durationMinutes * 60
         else:
             workout.total_duration = configuration.decoded_object.WorkoutDurationMinutesDefault * 60
-
-        print(workout.decoded_object)
-        print(workout.decoded_object.__dict__)
         if hasattr(workout.decoded_object, 'musclegroups'):
             workout.muscle_groups = workout.decoded_object.musclegroups
         else:
@@ -70,9 +68,7 @@ class DynamicWorkoutDecoder:
         total_duration = 0
         max_duration = workout.total_duration
 
-        print("Creating workout: {} for equipment: {} muscle groups: {}.".format(workout.name,
-                                                                                 workout.equipment,
-                                                                                 workout.muscle_groups))
+        logging.debug(f"Creating workout:{workout.name} for equipment:{workout.equipment} muscle groups:{workout.muscle_groups}")
 
         muscles_to_work = []
 
@@ -85,7 +81,7 @@ class DynamicWorkoutDecoder:
             filter = ExerciseDatabaseFilter(
                 muscle, [], workout.equipment)
 
-            print("Finding exercises for required muscle:{}".format(muscle))
+            logging.debug(f"Finding exercises for required muscle:{muscle}")
             exercises_for_muscle = exercise_database.get_exercises_from_filter(
                 filter)
             random.shuffle(exercises_for_muscle)
@@ -98,8 +94,9 @@ class DynamicWorkoutDecoder:
 
             # Add it to the workout
             total_duration += exercise.total_duration
-            print("Adding exercise: {} for required muscle:{} to workout:{}. TotalDuration:{}/{}".format(
-                exercise.name, muscle, workout.name, total_duration, max_duration))
+            logging.debug(
+                f"Adding exercise: {exercise.name} for required muscle:{muscle} to workout:{workout.name}." +
+                f"TotalDuration:{total_duration}/{max_duration}")
             workout.exercises.append(exercise)
             if total_duration >= max_duration:
                 break
@@ -110,8 +107,9 @@ class DynamicWorkoutDecoder:
             exercise = exercise_database.get_new_exercise_helper(exercises, workout.exercises)
 
             total_duration += exercise.total_duration
-            print("Adding exercise: {} to workout:{}. TotalDuration:{}/{}".format(
-                exercise.name, workout.name, total_duration, max_duration))
+            logging.debug(
+                f"Adding exercise:{exercise.name} to workout:{workout.name}." +
+                f"TotalDuration:{total_duration}/{max_duration}")
             workout.exercises.append(exercise)
 
         return workout

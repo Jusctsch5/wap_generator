@@ -81,7 +81,7 @@ class WorkoutDecoder:
 
             # If the ID is supplied, then fill out the rest from the database.
             exercise_json = workout.decoded_object.exercises[exercise_i]
-            print(exercise_json)
+            logging.debug(exercise_json)
             exercise = Exercise()
             exercise.id = exercise_json.id
             exercise.duration = exercise_json.duration

@@ -1,3 +1,4 @@
+import logging
 import random
 import pyttsx3
 import uuid
@@ -26,18 +27,16 @@ class Announcer:
         self.volume = volume
         self.random_voice = random_voice
         self.voice_name = voice_name
-        print(self.__dict__)
 
     def __get_short_uuid_str(self):
         return str(self.session_uuid).split('-')[0]
 
     def configure(self):
-        # print("Configure AudioSegment with ffmpeg: " + path)
+        logging.debug(f"Configure AudioSegment with ffmpeg:{self.path}")
         AudioSegment.ffmpeg = self.path
 
         # Configure the text-to-speech engine
-        self.engine.setProperty(
-            'volume', self.volume)
+        self.engine.setProperty('volume', self.volume)
         self.engine.setProperty('rate', 145)  # default 200
 
         # Cache voice clips with desired announcer for better performance.
@@ -59,20 +58,26 @@ class Announcer:
         self.change_sides = AudioSegment.from_file(name)
 
         voices = self.engine.getProperty('voices')
+        logging.debug("Provided voices from OS:")
         for voice in voices:
-            print(voice.__dict__)
+            logging.debug(voice.__dict__)
 
         if self.voice_name:
+            found = False
             for voice in voices:
-
                 if self.voice_name.lower() in voice.name.lower():
-                    print(f"Setting voice to {voice.name}")
+                    logging.debug(f"Setting voice to {voice.name}")
                     self.engine.setProperty('voice', voice.id)
-
-        if self.random_voice:
+                    found = True
+                    break
+            if found is False:
+                logging.debug(f"Couldn't find desired voice{self.voice_name}. Defaulting to system default voice {voices[0].name}")
+        elif self.random_voice:
             rand_voice = random.choice(voices)
-            print(f"Setting voice randomly to {voice.name}")
+            logging.debug(f"Setting voice randomly to {voice.name}")
             self.engine.setProperty('voice', rand_voice.id)
+        else:
+            logging.debug(f"Defaulting to system default voice {voices[0].name}")
 
     def create_voice_clip(self, clip):
 
@@ -86,7 +91,7 @@ class Announcer:
         path = os.path.dirname(os.path.abspath(__file__))
         name = os.path.join(path, name)
 
-        # print("Creating new voiceclip with name: " + name)
+        # logging.debug("Creating new voiceclip with name: " + name)
         clip = AudioSegment.from_file(name)
         self.clip_index = self.clip_index + 1
 
@@ -118,13 +123,12 @@ class Announcer:
 
     def generate_total_clip(self, total_clip, name, output_dir):
 
-        resulting_name = str(self.session_uuid).split(
-            '-')[0] + "_" + name + ".mp3"
+        resulting_name = str(self.session_uuid).split('-')[0] + "_" + name + ".mp3"
         if output_dir == "":
             resulting_name = os.path.join("result", resulting_name)
         else:
             resulting_name = os.path.join(output_dir, resulting_name)
 
-        print("Creating new total workout clip with name: " + resulting_name)
+        logging.debug("Creating new total workout clip with name: " + resulting_name)
         file_handle = total_clip.export(resulting_name, format="mp3")
         return resulting_name

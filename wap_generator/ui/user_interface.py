@@ -1,3 +1,4 @@
+import logging
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
@@ -25,7 +26,7 @@ class SelectWorkoutButton(Button):
         self.bind(on_press=self.callback)
 
     def callback(self, instance):
-        print('The button %s state is <%s>' % (instance, instance.state))
+        logging.debug('The button %s state is <%s>' % (instance, instance.state))
         self.app.generate_and_play_workout(self.filename)
 
 
