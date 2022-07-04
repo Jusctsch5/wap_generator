@@ -1,6 +1,7 @@
 # Usage
 
 .\workout_env\Scripts\activate
+
 Run one of generate_dynamic_workout, generate_static_workout, or generate_regimen
 ## generate_dynamic_workout.py
 - Consumes a file that describes the details of the dynamic workout, such as the muscle groups to work, the duration, as well as start/end delays.

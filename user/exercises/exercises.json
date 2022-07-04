@@ -28,7 +28,7 @@
             "equipment":["resistanceband"],
             "musclegroups": ["legs", "arms"],
             "muscles":["glutes", "hipflexors", "quads", "abs", "calves", "biceps"]
-        },        
+        },
         {
             "name": "High Downward Oblique Swing",
             "description": "Using high suspended bands from standing position, rotate body while pulling bands across. Should result in a full 180 rotation. Switch between sets",
@@ -61,7 +61,7 @@
             "alternatesidesbetweensets": true,
             "id": "eb53860f-a1e6-4e9f-802a-24cb692d47e7",
             "equipment":["suspendedband"],
-            "musclegroups": ["abdominals"],            
+            "musclegroups": ["abdominals"],
             "muscles": ["obliques"]
         },
         {
@@ -77,7 +77,7 @@
             "id": "3d7f94b9-344e-47b7-a2f0-770cf49e8718",
             "equipment":["resistanceband"],
             "musclegroups": ["abdominals", "legs"],
-            "muscles": ["glutes", "hipflexors", "quads", "calves", "hamstrings"]       
+            "muscles": ["glutes", "hipflexors", "quads", "calves", "hamstrings"]
         },
         {
             "name": "Romanian Deadlift",
@@ -142,23 +142,23 @@
             "name": "Seated Wide Rows",
             "description": "Sit down with legs out. Hook bands on feet. Pull to upper chest with rowing motion.",
             "id": "0bf8089b-32b8-42b5-b589-c850453143b7",
-            "equipment":["resistanceband"],            
+            "equipment":["resistanceband"],
             "musclegroups": ["arms"],
             "muscles": ["traps", "rotatorcuff" ]
-        },        
+        },
         {
             "name": "High to Low Rows",
             "description": "Get down on one knee, grasp high suspended bands. Pull down to upper chest with rowing motion.",
             "id": "0bf8089b-32b8-42b5-b589-c850453143b8",
-            "equipment":["suspendedband"],            
+            "equipment":["suspendedband"],
             "musclegroups": ["arms"],
             "muscles": ["traps", "rotatorcuff" ]
-        },        
+        },
         {
             "name": "Alt Low Crossover",
             "description": "Standing with arms down at sides. Hook bands on one or more feet. Perform dumbbell curl across body.",
             "id": "0e310266-3e16-43e9-88f3-e1e2be1f900e",
-            "equipment":["resistanceband"],            
+            "equipment":["resistanceband"],
             "musclegroups": ["arms"],
             "muscles": ["biceps"]
         },
@@ -224,7 +224,7 @@
             "equipment":["resistanceband"],
             "musclegroups": ["arms"],
             "muscles": ["deltoids", "triceps", "traps", "pecs"]
-        },        
+        },
         {
             "name": "Push Ups",
             "description": "On all fours, push up and down.",
@@ -240,7 +240,7 @@
             "equipment":[],
             "musclegroups": ["abdominals"],
             "muscles": ["abs", "pecs"]
-        },        
+        },
         {
             "name": "Plank",
             "description": "Lay on the floor with elbows. Keeping forearms and knees on the floor slowly raise yourself upwards.",
@@ -248,12 +248,12 @@
             "equipment":[],
             "musclegroups": ["arms", "abdominals"],
             "muscles": ["abs", "pecs", "deltoids", "triceps"]
-        },        
+        },
         {
             "name": "Spiderman Crunches",
             "description": "On all fours, activate core and move one leg up to chest. alternate legs within each set.",
             "id": "1cc45dbd-3803-45ed-bc2c-5fde86514327",
-            "equipment":[],            
+            "equipment":[],
             "musclegroups": ["abdominals"],
             "muscles": ["abs"]
         },

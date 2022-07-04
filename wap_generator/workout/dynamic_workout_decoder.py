@@ -1,8 +1,6 @@
 from pathlib import Path, PurePath
-from wap_generator.exercise.exercise import Exercise
 from wap_generator.exercise.exercise_database_filter import ExerciseDatabaseFilter
 from .workout import Workout
-from wap_generator.announcer.announcer import Announcer
 from types import SimpleNamespace
 import json
 import random
@@ -18,30 +16,32 @@ class DynamicWorkoutDecoder:
         '.', 'user', 'workout_dynamic')
 
     def __init__(self):
-        self.announcer_wrapper = Announcer()
+        pass
 
     def __decode_workout(self, workout_json, exercise_database, configuration):
-        self.announcer_wrapper.configure(configuration)
 
         workout = Workout(workout_json)
         workout.name = workout.decoded_object.name
-        if hasattr('workout.decoded_object', 'equipment'):
+        if hasattr(workout.decoded_object, 'equipment'):
             workout.equipment = workout.decoded_object.equipment
         else:
             workout.equipment = []
-        if hasattr('workout.decoded_object', 'startDelay'):
+        if hasattr(workout.decoded_object, 'startDelay'):
             workout.start_delay = workout.decoded_object.startDelay
         else:
             workout.start_delay = configuration.decoded_object.WorkoutStartDelayMinutesDefault
-        if hasattr('workout.decoded_object', 'finishDelay'):
+        if hasattr(workout.decoded_object, 'finishDelay'):
             workout.finish_delay = workout.decoded_object.finishDelay
         else:
             workout.finish_delay = configuration.decoded_object.WorkoutFinishDelayMinutesDefault
-        if hasattr('workout.decoded_object', 'durationMinutes'):
+        if hasattr(workout.decoded_object, 'durationMinutes'):
             workout.total_duration = workout.decoded_object.durationMinutes * 60
         else:
             workout.total_duration = configuration.decoded_object.WorkoutDurationMinutesDefault * 60
-        if hasattr('workout.decoded_object', 'musclegroups'):
+
+        print(workout.decoded_object)
+        print(workout.decoded_object.__dict__)
+        if hasattr(workout.decoded_object, 'musclegroups'):
             workout.muscle_groups = workout.decoded_object.musclegroups
         else:
             workout.muscle_groups = ["abdominals", "arms", "legs"]
@@ -114,8 +114,6 @@ class DynamicWorkoutDecoder:
                 exercise.name, workout.name, total_duration, max_duration))
             workout.exercises.append(exercise)
 
-        workout.transform_exercises_to_clip(
-            configuration, self.announcer_wrapper)
         return workout
 
     def decode_workout(self, workout_filename, exercise_database, configuration):

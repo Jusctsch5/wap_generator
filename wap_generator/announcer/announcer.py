@@ -13,7 +13,7 @@ class Announcer:
                         that can be used by the decoders.
     """
 
-    def __init__(self):
+    def __init__(self, volume):
         self.engine = pyttsx3.init()
         self.session_uuid = uuid.uuid4()
         self.clip_index = 0
@@ -22,17 +22,18 @@ class Announcer:
         self.path = os.path.dirname(os.path.abspath(__file__))
         self.samples_dir = os.path.join(self.path, "samples")
         self.temp_dir = os.path.join(self.path, "temp")
+        self.volume = volume
 
     def __get_short_uuid_str(self):
         return str(self.session_uuid).split('-')[0]
 
-    def configure(self, configuration):
+    def configure(self):
         # print("Configure AudioSegment with ffmpeg: " + path)
         AudioSegment.ffmpeg = self.path
 
         # Configure the text-to-speech engine
         self.engine.setProperty(
-            'volume', configuration.decoded_object.AnnouncementVolume)
+            'volume', self.volume)
         self.engine.setProperty('rate', 145)  # default 200
 
         # Cache voice clips with desired announcer for better performance.
@@ -52,6 +53,10 @@ class Announcer:
         self.engine.save_to_file("change sides", name)
         self.engine.runAndWait()
         self.change_sides = AudioSegment.from_file(name)
+
+        voices = self.engine.getProperty('voices')
+        for voice in voices:
+            print(voice.__dict__)
 
     def create_voice_clip(self, clip):
 

@@ -6,10 +6,13 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
+from wap_generator.announcer.announcer_decoder import AnnouncerDecoder
 
 from wap_generator.configuration.configuration_decoder import ConfigurationDecoder
 from wap_generator.exercise.exercise_database_decoder import ExerciseDatabaseDecoder
 from wap_generator.workout.dynamic_workout_decoder import DynamicWorkoutDecoder
+
+from pydub.playback import play
 
 
 class SelectWorkoutButton(Button):
@@ -33,6 +36,10 @@ class UserInterface(App):
         exercise_decoder = ExerciseDatabaseDecoder()
         self.exercise_database = exercise_decoder.decode_common_exercise_database(self.configuration)
         self.workout_decoder = DynamicWorkoutDecoder()
+
+        announcer_decoder = AnnouncerDecoder()
+        self.announcer = announcer_decoder.decode_common_configuration()
+
         super().__init__()
 
     def build(self):
@@ -52,4 +59,5 @@ class UserInterface(App):
     def generate_and_play_workout(self, workout_file):
         workout = self.workout_decoder.decode_workout(workout_file, self.exercise_database, self.configuration)
         self.configuration.decoded_object.Autoplay = True
-        workout.generate_total_clip("", self.configuration)
+        clip = workout.transform_exercises_to_clip(self.configuration, self.announcer)
+        play(clip)
