@@ -1,3 +1,4 @@
+import logging
 from wap_generator.exercise.exercise import Exercise
 from workout import Workout
 from wap_generator.announcer.announcer import Announcer
@@ -81,7 +82,7 @@ class WorkoutDecoder:
 
             # If the ID is supplied, then fill out the rest from the database.
             exercise_json = workout.decoded_object.exercises[exercise_i]
-            logging.debug(exercise_json)
+            logging.info(exercise_json)
             exercise = Exercise()
             exercise.id = exercise_json.id
             exercise.duration = exercise_json.duration

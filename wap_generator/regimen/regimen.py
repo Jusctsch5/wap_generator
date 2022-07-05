@@ -24,7 +24,7 @@ class Regimen:
 
     def process_regimen(self, output_directory, configuration, playlist):
         for day in self.days:
-            logging.debug(f"Generating clip or regimen on day: {day.name}")
+            logging.info(f"Generating clip or regimen on day: {day.name}")
             day_directory = os.path.join(output_directory, self.id, day.name)
             for workout in day.workouts:
                 if playlist is None:

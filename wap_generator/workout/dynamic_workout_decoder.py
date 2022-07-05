@@ -68,7 +68,7 @@ class DynamicWorkoutDecoder:
         total_duration = 0
         max_duration = workout.total_duration
 
-        logging.debug(f"Creating workout:{workout.name} for equipment:{workout.equipment} muscle groups:{workout.muscle_groups}")
+        logging.info(f"Creating workout:{workout.name} for equipment:{workout.equipment} muscle groups:{workout.muscle_groups}")
 
         muscles_to_work = []
 
@@ -81,7 +81,7 @@ class DynamicWorkoutDecoder:
             filter = ExerciseDatabaseFilter(
                 muscle, [], workout.equipment)
 
-            logging.debug(f"Finding exercises for required muscle:{muscle}")
+            logging.info(f"Finding exercises for required muscle:{muscle}")
             exercises_for_muscle = exercise_database.get_exercises_from_filter(
                 filter)
             random.shuffle(exercises_for_muscle)
@@ -94,7 +94,7 @@ class DynamicWorkoutDecoder:
 
             # Add it to the workout
             total_duration += exercise.total_duration
-            logging.debug(
+            logging.info(
                 f"Adding exercise: {exercise.name} for required muscle:{muscle} to workout:{workout.name}." +
                 f"TotalDuration:{total_duration}/{max_duration}")
             workout.exercises.append(exercise)
@@ -107,7 +107,7 @@ class DynamicWorkoutDecoder:
             exercise = exercise_database.get_new_exercise_helper(exercises, workout.exercises)
 
             total_duration += exercise.total_duration
-            logging.debug(
+            logging.info(
                 f"Adding exercise:{exercise.name} to workout:{workout.name}." +
                 f"TotalDuration:{total_duration}/{max_duration}")
             workout.exercises.append(exercise)

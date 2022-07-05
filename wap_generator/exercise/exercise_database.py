@@ -49,7 +49,7 @@ class ExerciseDatabase:
             else:
                 match = True
             if match is False:
-                logging.info(f"Did not match exercise: {exercise.name} based on muscle filter: {filter.muscle}")
+                logging.debug(f"Did not match exercise: {exercise.name} based on muscle filter: {filter.muscle}")
                 continue
 
             # Make sure a muscle group matches, if provided in the filter
@@ -62,7 +62,7 @@ class ExerciseDatabase:
             else:
                 match = True
             if match is False:
-                logging.info(f"Did not match exercise: {exercise.name} based on muscle group filter: {filter.musclegroup}")
+                logging.debug(f"Did not match exercise: {exercise.name} based on muscle group filter: {filter.musclegroup}")
                 continue
 
             # Make sure an equipment matches, if provided in the filter
@@ -75,7 +75,7 @@ class ExerciseDatabase:
             else:
                 match = True
             if match is False:
-                logging.info(f"Did not match exercise: {exercise.name} based on equipment filter: {filter.equipment}")
+                logging.debug(f"Did not match exercise: {exercise.name} based on equipment filter: {filter.equipment}")
                 continue
 
             exercises.append(exercise)

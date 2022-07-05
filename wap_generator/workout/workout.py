@@ -36,7 +36,7 @@ class Workout:
             exercise = self.exercises[exercise_i]
             if first is True:
                 # Create announcement of workout
-                logging.debug(f"Creating clip for workout:{self.name} ")
+                logging.info(f"Creating clip for workout:{self.name} ")
                 total_clip = announcer.create_voice_clip(f"Starting workout:{self.name}" +
                                                          f" in {str(self.start_delay)} seconds." +
                                                          f" first exercise will be {exercise.name}")
@@ -50,7 +50,7 @@ class Workout:
                         self.start_delay)
                 first = False
 
-            logging.debug(f"Creating clip for exercise:{exercise.name}")
+            logging.info(f"Creating clip for exercise:{exercise.name}")
 
             total_clip += announcer.create_voice_clip("Starting exercise:" + exercise.name)
 
@@ -76,7 +76,7 @@ class Workout:
             # If it's not the last exercise in the workout, announce the next one and give an exercise delay
             if exercise_i != len(self.exercises)-1:
                 clip = announcer.create_voice_clip(f"Exercise Cooldown for {str(exercise.exerciseCooldown)} seconds." +
-                                                   f"Next Exercise will be {self.exercises[exercise_i+1].name}")
+                                                   f"The next Exercise will be {self.exercises[exercise_i+1].name}")
                 total_clip = total_clip + clip
 
                 # After all sets in the exercise, give a finishing exercise cooldown.
@@ -104,7 +104,7 @@ class Workout:
         if (os.path.exists(os.path.dirname(resulting_name)) is False):
             os.makedirs(os.path.dirname(resulting_name))
 
-        logging.debug("Creating new total workout clip with name: " + resulting_name)
+        logging.info("Creating new total workout clip with name: " + resulting_name)
         if configuration.decoded_object.Autoplay:
             play(self.total_clip)
         else:

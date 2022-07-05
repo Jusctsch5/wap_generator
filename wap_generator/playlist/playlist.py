@@ -18,9 +18,9 @@ class Playlist:
         self.list_of_songs = []
 
     def __find_song_name(self, playlist_directory, name):
-        logging.debug("looking for song {} in playlist directory {}".format(name, playlist_directory))
+        logging.info("looking for song {} in playlist directory {}".format(name, playlist_directory))
         for path in Path(playlist_directory).rglob(name):
-            logging.debug("Found path:" + str(path))
+            logging.info("Found path:" + str(path))
             return path
 
     def __get_list_of_songs_from_directory(self, directory):
@@ -65,7 +65,7 @@ class Playlist:
                 else:
                     playlist_clip += song_segment
 
-                logging.debug(f"Appending Song:{song} to workout. Current Duration: {playlist_clip.duration_seconds}, Workout Duration: {workout_duration}")
+                logging.info(f"Appending Song:{song} to workout. Current Duration: {playlist_clip.duration_seconds}, Workout Duration: {workout_duration}")
                 if playlist_clip.duration_seconds >= workout_duration:
                     done = True
                     break
@@ -74,9 +74,9 @@ class Playlist:
             if shuffle:
                 random.shuffle(self.decoded_object.playlist)
 
-        logging.debug(f"Resulting playlist file is {playlist_clip.duration_seconds} seconds")
+        logging.info(f"Resulting playlist file is {playlist_clip.duration_seconds} seconds")
         resulting_clip = resulting_clip.overlay(playlist_clip)
-        logging.debug(f"Resulting workout file is {resulting_clip.duration_seconds} seconds")
+        logging.info(f"Resulting workout file is {resulting_clip.duration_seconds} seconds")
 
         resulting_name = workout.decoded_object.name + "_" + \
             str(datetime.date.today()).replace("-", "_") + "_" + "WithPlaylist.mp3"
@@ -85,7 +85,7 @@ class Playlist:
         if (os.path.exists(os.path.dirname(os.path.dirname(resulting_name))) is False):
             os.makedirs(os.path.dirname(os.path.dirname(resulting_name)))
 
-        logging.debug(f"Creating new total workout clip and playlist with name:{resulting_name} ")
+        logging.info(f"Creating new total workout clip and playlist with name:{resulting_name} ")
         if configuration.decoded_object.Autoplay:
             play(resulting_clip)
         else:

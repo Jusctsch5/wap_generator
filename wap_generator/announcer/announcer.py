@@ -32,7 +32,7 @@ class Announcer:
         return str(self.session_uuid).split('-')[0]
 
     def configure(self):
-        logging.debug(f"Configure AudioSegment with ffmpeg:{self.path}")
+        logging.info(f"Configure AudioSegment with ffmpeg:{self.path}")
         AudioSegment.ffmpeg = self.path
 
         # Configure the text-to-speech engine
@@ -58,26 +58,26 @@ class Announcer:
         self.change_sides = AudioSegment.from_file(name)
 
         voices = self.engine.getProperty('voices')
-        logging.debug("Provided voices from OS:")
+        logging.info("Provided voices from OS:")
         for voice in voices:
-            logging.debug(voice.__dict__)
+            logging.info(voice.__dict__)
 
         if self.voice_name:
             found = False
             for voice in voices:
                 if self.voice_name.lower() in voice.name.lower():
-                    logging.debug(f"Setting voice to {voice.name}")
+                    logging.info(f"Setting voice to {voice.name}")
                     self.engine.setProperty('voice', voice.id)
                     found = True
                     break
             if found is False:
-                logging.debug(f"Couldn't find desired voice{self.voice_name}. Defaulting to system default voice {voices[0].name}")
+                logging.info(f"Couldn't find desired voice{self.voice_name}. Defaulting to system default voice {voices[0].name}")
         elif self.random_voice:
             rand_voice = random.choice(voices)
-            logging.debug(f"Setting voice randomly to {voice.name}")
+            logging.info(f"Setting voice randomly to {voice.name}")
             self.engine.setProperty('voice', rand_voice.id)
         else:
-            logging.debug(f"Defaulting to system default voice {voices[0].name}")
+            logging.info(f"Defaulting to system default voice {voices[0].name}")
 
     def create_voice_clip(self, clip):
 
@@ -91,7 +91,7 @@ class Announcer:
         path = os.path.dirname(os.path.abspath(__file__))
         name = os.path.join(path, name)
 
-        # logging.debug("Creating new voiceclip with name: " + name)
+        # logging.info("Creating new voiceclip with name: " + name)
         clip = AudioSegment.from_file(name)
         self.clip_index = self.clip_index + 1
 
@@ -129,6 +129,6 @@ class Announcer:
         else:
             resulting_name = os.path.join(output_dir, resulting_name)
 
-        logging.debug("Creating new total workout clip with name: " + resulting_name)
+        logging.info("Creating new total workout clip with name: " + resulting_name)
         file_handle = total_clip.export(resulting_name, format="mp3")
         return resulting_name

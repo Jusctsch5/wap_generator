@@ -28,7 +28,7 @@ class RegimenDecoder:
             index = index + 1
             day = Day()
             day.name = "{} {}".format(index, day_namespace.name)
-            logging.debug(f"Creating workouts for day: {day.name}")
+            logging.info(f"Creating workouts for day: {day.name}")
             for workout_namespace in day_namespace.workouts:
                 workout_namespace.name = "{} {}".format(day_namespace.name, workout_namespace.name)
                 workout = dynamicWorkoutDecoder.decode_workout_json(workout_namespace, exercise_database, configuration)

@@ -26,7 +26,7 @@ class SelectWorkoutButton(Button):
         self.bind(on_press=self.callback)
 
     def callback(self, instance):
-        logging.debug('The button %s state is <%s>' % (instance, instance.state))
+        logging.info('The button %s state is <%s>' % (instance, instance.state))
         self.app.generate_and_play_workout(self.filename)
 
 
