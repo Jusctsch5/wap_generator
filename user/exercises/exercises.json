@@ -27,13 +27,13 @@
             "id": "598ae548-4fca-445b-a5d1-1a64b0ffe3ab",
             "equipment":["resistanceband"],
             "musclegroups": ["legs", "arms"],
-            "muscles":["glutes", "hipflexors", "quads", "abs", "calves", "biceps"]
+            "muscles":["glutes", "hipflexors", "quads", "abs", "calves", "biceps", "adductor"]
         },
         {
             "name": "High Downward Oblique Swing",
             "description": "Using high suspended bands from standing position, rotate body while pulling bands across. Should result in a full 180 rotation. Switch between sets",
             "id": "e968f38d-b35f-44e0-b77c-4ec88812c9da",
-            "alternatesidesbetweensets": true,
+            "alternateSidesBetweenSets": true,
             "equipment":["suspendedband"],
             "musclegroups": ["abdominals"],
             "muscles": ["abs", "obliques"]
@@ -42,7 +42,7 @@
             "name": "Middle Pallof Press",
             "description": "Using middle suspended bands, standing with arms out, grab both band handholds and push out at an angle. Band should never be slack. Switch sides between sets",
             "id": "d20ca7bb-f653-4aa9-9c06-6c0f87304631",
-            "alternatesidesbetweensets": true,
+            "alternateSidesBetweenSets": true,
             "equipment":["suspendedband"],
             "musclegroups": ["abdominals", "arms"],
             "muscles": ["abs", "obliques", "glutes"]
@@ -58,7 +58,7 @@
         {
             "name": "Low Downward Oblique Swing",
             "description": "Using low suspended bands from standing position, with fists together, rotate body while pulling bands across and up body. Arms should remain straight. Switch between sets",
-            "alternatesidesbetweensets": true,
+            "alternateSidesBetweenSets": true,
             "id": "eb53860f-a1e6-4e9f-802a-24cb692d47e7",
             "equipment":["suspendedband"],
             "musclegroups": ["abdominals"],
@@ -69,7 +69,8 @@
             "description": "Lying down with legs opposite bands and hands above body gripping low suspended bands, bring knees up to chest and back to lying down position",
             "id": "70415c22-73ff-44b6-88ee-375fc9622476",
             "equipment":["resistanceband"],
-            "musclegroups": ["abdominals", "legs"]
+            "musclegroups": ["abdominals", "legs"],
+            "muscles": ["abs", "calves", "hamstrings"]
         },
         {
             "name": "Hex Squats",
@@ -77,7 +78,7 @@
             "id": "3d7f94b9-344e-47b7-a2f0-770cf49e8718",
             "equipment":["resistanceband"],
             "musclegroups": ["abdominals", "legs"],
-            "muscles": ["glutes", "hipflexors", "quads", "calves", "hamstrings"]
+            "muscles": ["glutes", "hipflexors", "quads", "calves", "hamstrings", "adductor"]
         },
         {
             "name": "Romanian Deadlift",
@@ -91,7 +92,7 @@
             "name": "Glute Kickbacks",
             "description": "Down on all fours. Grab band with one hand, attach band to corresponding foot. Kick back with banded foot. Alternate between sets",
             "id": "adde769c-42b8-4cc1-807a-9547be75bace",
-            "alternatesidesbetweensets": true,
+            "alternateSidesBetweenSets": true,
             "equipment":["resistanceband"],
             "musclegroups": ["legs"],
             "muscles": [ "hamstrings", "glutes", "hipflexors"]
@@ -116,16 +117,16 @@
             "name": "Leg Lifts",
             "description": "Standing up, with one band hooked on a leg and the other under the other foot. Extend leg out to the side. Alternate between sets",
             "id": "203ac060-a815-4e62-bc01-f830dbcfd0d2",
-            "alternatesidesbetweensets": true,
-            "musclegroups": ["legs"],
+            "alternateSidesBetweenSets": true,
             "equipment":["resistanceband"],
+            "musclegroups": ["legs"],
             "muscles": [ "glutes"]
         },
         {
             "name": "Lunge with Band",
             "description": "One leg in front, one back. Band in both hands, looped on front leg. Lunge down and back up. Alternate legs",
             "id": "0e310266-3e16-43e9-88f3-e1e2be1f900d",
-            "alternatesidesbetweensets": true,
+            "alternateSidesBetweenSets": true,
             "equipment":["resistanceband"],
             "musclegroups": ["legs"],
             "muscles": [ "hamstrings", "glutes", "quads"]
@@ -199,7 +200,8 @@
             "description": "Standing with arms down at sides. lay band under both feet, hold one end of the band. perform a side bend, with the resting position providing tension to the band",
             "id": "eb7e70e1-485d-45f7-a054-2eadb74dcdcc",
             "equipment":["resistanceband"],
-            "musclegroups": ["abdominals"]
+            "musclegroups": ["abdominals"],
+            "muscles": ["obliques", "abs"]
         },
         {
             "name": "Overhead Triceps Extension",
@@ -215,7 +217,7 @@
             "id": "72bce0ab-7f68-42df-9594-0f4f905b7d24",
             "equipment":["resistanceband"],
             "musclegroups": ["arms"],
-            "muscle": ["triceps", "traps", "deltoids"]
+            "muscles": ["triceps", "traps", "deltoids"]
         },
         {
             "name": "Shoulder Press",
@@ -229,7 +231,6 @@
             "name": "Push Ups",
             "description": "On all fours, push up and down.",
             "id": "17cefddc-afba-4bad-bd68-14fe20b6d8e8",
-            "equipment":[],
             "musclegroups": ["arms", "abdominals"],
             "muscles": ["abs", "pecs", "deltoids", "triceps"]
         },
@@ -237,7 +238,6 @@
             "name": "Jackknife",
             "description": "Lie down with arms and legs outstretched. Simultaneously raise torso and arms to touch them together, then go back down",
             "id": "17cefdfc-afba-4bad-bd68-14fe20b6d8e8",
-            "equipment":[],
             "musclegroups": ["abdominals"],
             "muscles": ["abs", "pecs"]
         },
@@ -245,15 +245,13 @@
             "name": "Plank",
             "description": "Lay on the floor with elbows. Keeping forearms and knees on the floor slowly raise yourself upwards.",
             "id": "17ceeddc-afba-4bad-bd68-14fe20b6d8e8",
-            "equipment":[],
             "musclegroups": ["arms", "abdominals"],
-            "muscles": ["abs", "pecs", "deltoids", "triceps"]
+            "muscles": ["abs", "pecs", "deltoids", "triceps", "adductor"]
         },
         {
             "name": "Spiderman Crunches",
             "description": "On all fours, activate core and move one leg up to chest. alternate legs within each set.",
             "id": "1cc45dbd-3803-45ed-bc2c-5fde86514327",
-            "equipment":[],
             "musclegroups": ["abdominals"],
             "muscles": ["abs"]
         },
@@ -277,7 +275,7 @@
             "name": "Fire Hydrant",
             "description": "Go down on hands and knees, place glute band just above knees. Engaging glutes and outer thighs, lift knee out to the side without shifting hips. Change sides between sets",
             "id": "1cd45ded-3803-45ed-bc2c-5fde86514327",
-            "alternatesidesbetweensets": true,
+            "alternateSidesBetweenSets": true,
             "equipment":["gluteband"],
             "musclegroups": ["legs"],
             "muscles": ["glutes", "quads"]
@@ -286,7 +284,7 @@
             "name": "Clamshell",
             "description": "Go down on side, place glute band just above knees, bent to 90 degrees. Prop head up on hand, rest it on biceps, or support yourself with lower arm. Engage core, keep feet pressed together, and drive top knee toward the ceiling as far as you can without compensating form. Changes sides between sets",
             "id": "2cd45ded-3803-45ed-bc2c-5fde86514327",
-            "alternatesidesbetweensets": true,
+            "alternateSidesBetweenSets": true,
             "equipment":["gluteband"],
             "musclegroups": ["legs"],
             "muscles": ["glutes", "obliques"]

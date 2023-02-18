@@ -1,6 +1,6 @@
 # Usage
 
-.\workout_env\Scripts\activate
+.\env\Scripts\activate
 
 Run one of generate_dynamic_workout, generate_static_workout, or generate_regimen
 ## generate_dynamic_workout.py
@@ -30,3 +30,8 @@ Run one of generate_dynamic_workout, generate_static_workout, or generate_regime
 .\generate_dynamic_workout.py .\user\workout_dynamic\dynamic_all_no_suspended_workout.json -c .\user\configuration\configuration_autoplay_no_music.json -e .\user\exercises\exercises.json
 
 .\generate_dynamic_workout.py .\user\workout_dynamic\dynamic_arms_no_suspended_workout.json -c .\user\configuration\configuration_autoplay_no_music.json -e .\user\exercises\exercises.json
+
+.\generate_exercises.py .\user\exercises\exercises.json -c .\user\configuration\configuration_autoplay_no_music.json
+
+# c:/Users/schum/source/repos/WAPGenerator/env/Scripts/Activate.ps1
+# .\wap_ui.py

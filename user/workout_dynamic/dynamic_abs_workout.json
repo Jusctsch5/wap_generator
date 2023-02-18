@@ -1,8 +1,0 @@
-{
-    "name": "Dynamic Abs Workout",
-    "musclegroups": ["abdominals"],
-    "durationMinutes": 20,
-    "equipment":["resistanceband", "gluteband", "ring"],
-    "startDelay": 20,
-    "finishDelay": 60
-}

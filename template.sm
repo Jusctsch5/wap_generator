@@ -1,0 +1,37 @@
+#TITLE:$exercise_name;
+#SUBTITLE:$exercise_group;
+#ARTIST:;
+#TITLETRANSLIT:;
+#SUBTITLETRANSLIT:;
+#ARTISTTRANSLIT:;
+#GENRE:;
+#CREDIT:;
+#MUSIC:$exercise_mp3;
+#BANNER:;
+#BACKGROUND:;
+#CDTITLE:;
+#SAMPLESTART:0.000;
+#SAMPLELENGTH:0.000;
+#SELECTABLE:YES;
+#OFFSET:;
+#BPMS:0.000=158.000;
+#STOPS:0=$exercise_length_seconds;
+#BGCHANGES:;
+#FGCHANGES:;
+//--------------- dance-single -  ----------------
+#NOTES:
+     dance-single:
+     :
+     Easy:
+     3:
+     0,0,0,0,0:
+0000
+0000
+0000
+0000
+,
+1000
+0000
+0000
+0000
+;

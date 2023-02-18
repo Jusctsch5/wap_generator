@@ -78,7 +78,10 @@ class ExerciseDatabaseDecoder:
                 exercise_object = Exercise()
                 exercise_object.name = exercise_json['name']
                 exercise_object.description = exercise_json['description']
-                exercise_object.equipment = exercise_json['equipment']
+                if "equipment" in exercise_json:
+                    exercise_object.equipment = exercise_json['equipment']
+                else:
+                    exercise_object.equipment = []
                 exercise_object.id = exercise_json['id']
                 if 'alternatesidesbetweensets' in exercise_json:
                     exercise_object.alternatesidesbetweensets = exercise_json['alternatesidesbetweensets']
